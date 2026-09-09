@@ -84,6 +84,12 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
         SettingsManager.getInstance().applySettingsToActivity(this);
         EdgeToEdge.enable(this);
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                androidx.core.app.ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1002);
+            }
+        }
+
         studentRepository = new StudentRepositoryImpl();
     }
 
@@ -203,6 +209,37 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
         fetchStudentHeaderInfo();
         fetchCommonMessages();
         fetchCommonMenuData();
+        initGradeMonitoring();
+    }
+
+    private void initGradeMonitoring() {
+        vn.edu.mku.portal.ui.common.GradeNotificationManager.createNotificationChannel(this);
+        vn.edu.mku.portal.ui.common.GradeNotificationManager.schedulePeriodicGradeCheck(this);
+
+        studentRepository.fetchStudyProgramHeaders(new StudentRepository.ApiCallback<>() {
+            @Override
+            public void onSuccess(List<vn.edu.mku.portal.data.network.model.StudyProgramHeader> headers) {
+                if (headers != null && !headers.isEmpty()) {
+                    String programId = headers.get(0).getStudyProgramId();
+                    studentRepository.fetchMarks(programId, "SV", new StudentRepository.ApiCallback<>() {
+                        @Override
+                        public void onSuccess(List<vn.edu.mku.portal.data.network.model.MarkYearGroup> marks) {
+                            vn.edu.mku.portal.ui.common.GradeNotificationManager.processAndNotify(
+                                    BaseStudentActivity.this,
+                                    SessionManager.getInstance().getStudentId(),
+                                    marks
+                            );
+                        }
+
+                        @Override
+                        public void onError(String errorMessage) {}
+                    });
+                }
+            }
+
+            @Override
+            public void onError(String errorMessage) {}
+        });
     }
 
     private void fetchStudentHeaderInfo() {
@@ -547,7 +584,8 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
 
         btnLogout.setOnClickListener(v -> {
             popupWindow.dismiss();
-            AppCacheManager.getInstance().clearUserCache();
+            vn.edu.mku.portal.ui.common.GradeNotificationManager.cancelPeriodicGradeCheck(this);
+            AppCacheManager.getInstance().clearMemory();
             SessionManager.getInstance().clearSession();
             Toast.makeText(this, getString(R.string.btn_logout), Toast.LENGTH_SHORT).show();
             redirectToLogin();

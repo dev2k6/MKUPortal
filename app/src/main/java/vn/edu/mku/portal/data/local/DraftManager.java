@@ -2,6 +2,7 @@ package vn.edu.mku.portal.data.local;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 public class DraftManager {
 
@@ -39,6 +40,7 @@ public class DraftManager {
         return instance;
     }
 
+    // Global drafts (e.g. login, forgot password)
     public void saveDraft(String formKey, String fieldKey, String value) {
         String key = formKey + "_" + fieldKey;
         if (value == null) {
@@ -57,6 +59,37 @@ public class DraftManager {
         SharedPreferences.Editor editor = prefs.edit();
         for (String key : prefs.getAll().keySet()) {
             if (key.startsWith(formKey + "_")) {
+                editor.remove(key);
+            }
+        }
+        editor.apply();
+    }
+
+    // Student-scoped drafts (e.g. contact/feedback, declaration per student)
+    private String buildStudentPrefix(String studentId, String formKey, String fieldKey) {
+        String sId = !TextUtils.isEmpty(studentId) ? studentId : "guest";
+        return sId + "_" + formKey + "_" + fieldKey;
+    }
+
+    public void saveStudentDraft(String studentId, String formKey, String fieldKey, String value) {
+        String key = buildStudentPrefix(studentId, formKey, fieldKey);
+        if (value == null) {
+            prefs.edit().remove(key).apply();
+        } else {
+            prefs.edit().putString(key, value).apply();
+        }
+    }
+
+    public String getStudentDraft(String studentId, String formKey, String fieldKey, String defaultValue) {
+        String key = buildStudentPrefix(studentId, formKey, fieldKey);
+        return prefs.getString(key, defaultValue);
+    }
+
+    public void clearStudentDraft(String studentId, String formKey) {
+        String prefix = (!TextUtils.isEmpty(studentId) ? studentId : "guest") + "_" + formKey + "_";
+        SharedPreferences.Editor editor = prefs.edit();
+        for (String key : prefs.getAll().keySet()) {
+            if (key.startsWith(prefix)) {
                 editor.remove(key);
             }
         }

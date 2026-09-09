@@ -145,6 +145,37 @@ public class AppCacheManager {
         diskExecutor.execute(() -> prefs.edit().remove(key).apply());
     }
 
+    public synchronized void clearStudentCache(String studentId) {
+        if (studentId == null || studentId.trim().isEmpty()) {
+            clearUserCache();
+            return;
+        }
+        String prefix = studentId.trim() + "_";
+
+        // Evict from memory
+        Map<String, CacheEntry> snapshot = memoryCache.snapshot();
+        for (String k : snapshot.keySet()) {
+            if (k.startsWith(prefix) || k.contains(studentId)) {
+                memoryCache.remove(k);
+            }
+        }
+
+        // Evict from disk
+        diskExecutor.execute(() -> {
+            SharedPreferences.Editor editor = prefs.edit();
+            for (String k : prefs.getAll().keySet()) {
+                if (k.startsWith(prefix) || k.contains(studentId)) {
+                    editor.remove(k);
+                }
+            }
+            editor.apply();
+        });
+    }
+
+    public synchronized void clearMemory() {
+        memoryCache.evictAll();
+    }
+
     public synchronized void clearUserCache() {
         memoryCache.evictAll();
         diskExecutor.execute(() -> prefs.edit().clear().apply());

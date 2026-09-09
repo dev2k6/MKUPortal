@@ -52,6 +52,14 @@ public class StudentRepositoryImpl implements StudentRepository {
         this.sessionManager = SessionManager.getInstance();
     }
 
+    private String studentKey(String suffix) {
+        String id = sessionManager.getStudentId();
+        if (TextUtils.isEmpty(id)) {
+            id = "guest";
+        }
+        return id + "_" + suffix;
+    }
+
     private interface OnSuccessHook<T> {
         void onHook(T body);
     }
@@ -122,7 +130,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchStudentInfo(ApiCallback<StudentInfoResponse> callback) {
-        String key = "student_info_" + sessionManager.getStudentId();
+        String key = studentKey("info");
         executeCached(
                 key,
                 StudentInfoResponse.class,
@@ -140,7 +148,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchMessages(ApiCallback<List<StudentMessage>> callback) {
-        String key = "messages_" + sessionManager.getStudentId();
+        String key = studentKey("messages");
         executeCached(
                 key,
                 new TypeToken<List<StudentMessage>>() {}.getType(),
@@ -154,7 +162,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchMenu(String langCode, ApiCallback<List<MenuItem>> callback) {
-        String key = "menu_" + langCode;
+        String key = studentKey("menu_" + langCode);
         executeCached(
                 key,
                 new TypeToken<List<MenuItem>>() {}.getType(),
@@ -168,7 +176,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchStudyProgramHeaders(ApiCallback<List<StudyProgramHeader>> callback) {
-        String key = "study_program_headers_" + sessionManager.getStudentId();
+        String key = studentKey("study_programs");
         executeCached(
                 key,
                 new TypeToken<List<StudyProgramHeader>>() {}.getType(),
@@ -182,7 +190,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchStudyProgramDetail(String studyProgramId, ApiCallback<StudyProgramDetailResponse> callback) {
-        String key = "study_program_detail_" + sessionManager.getStudentId() + "_" + studyProgramId;
+        String key = studentKey("study_program_" + studyProgramId);
         executeCached(
                 key,
                 StudyProgramDetailResponse.class,
@@ -196,7 +204,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchYearAndTerm(ApiCallback<YearAndTermResponse> callback) {
-        String key = "year_and_term";
+        String key = studentKey("year_and_term");
         executeCached(
                 key,
                 YearAndTermResponse.class,
@@ -210,7 +218,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchWeekSchedule(String year, String term, ApiCallback<List<WeekItem>> callback) {
-        String key = "week_schedule_" + year + "_" + term;
+        String key = studentKey("week_schedule_" + year + "_" + term);
         executeCached(
                 key,
                 new TypeToken<List<WeekItem>>() {}.getType(),
@@ -224,7 +232,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchDrawingSchedules(String year, String term, int week, ApiCallback<DrawingScheduleResponse> callback) {
-        String key = "drawing_schedules_" + sessionManager.getStudentId() + "_" + year + "_" + term + "_" + week;
+        String key = studentKey("drawing_schedules_" + year + "_" + term + "_" + week);
         executeCached(
                 key,
                 DrawingScheduleResponse.class,
@@ -238,7 +246,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchPeriodSchedules(String year, String term, ApiCallback<PeriodScheduleResponse> callback) {
-        String key = "period_schedules_" + sessionManager.getStudentId() + "_" + year + "_" + term;
+        String key = studentKey("period_schedules_" + year + "_" + term);
         executeCached(
                 key,
                 PeriodScheduleResponse.class,
@@ -252,7 +260,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchExams(String year, String term, ApiCallback<List<ExamItem>> callback) {
-        String key = "exams_" + sessionManager.getStudentId() + "_" + year + "_" + term;
+        String key = studentKey("exams_" + year + "_" + term);
         executeCached(
                 key,
                 new TypeToken<List<ExamItem>>() {}.getType(),
@@ -266,7 +274,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchDecisions(ApiCallback<List<DecisionItem>> callback) {
-        String key = "decisions_" + sessionManager.getStudentId();
+        String key = studentKey("decisions");
         executeCached(
                 key,
                 new TypeToken<List<DecisionItem>>() {}.getType(),
@@ -280,7 +288,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchBehaviorScores(ApiCallback<List<BehaviorScoreItem>> callback) {
-        String key = "behavior_scores_" + sessionManager.getStudentId();
+        String key = studentKey("behavior_scores");
         executeCached(
                 key,
                 new TypeToken<List<BehaviorScoreItem>>() {}.getType(),
@@ -294,7 +302,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchMarks(String programId, String type, ApiCallback<List<MarkYearGroup>> callback) {
-        String key = "marks_" + sessionManager.getStudentId() + "_" + programId + "_" + type;
+        String key = studentKey("marks_" + programId + "_" + type);
         executeCached(
                 key,
                 new TypeToken<List<MarkYearGroup>>() {}.getType(),
@@ -308,7 +316,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchMarkDetail(String scheduleStudyUnitId, ApiCallback<List<MarkDetailItem>> callback) {
-        String key = "mark_detail_" + sessionManager.getStudentId() + "_" + scheduleStudyUnitId;
+        String key = studentKey("mark_detail_" + scheduleStudyUnitId);
         executeCached(
                 key,
                 new TypeToken<List<MarkDetailItem>>() {}.getType(),
@@ -336,7 +344,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchAccountFees(ApiCallback<List<AccountFeeItem>> callback) {
-        String key = "account_fees_" + sessionManager.getStudentId();
+        String key = studentKey("account_fees");
         executeCached(
                 key,
                 new TypeToken<List<AccountFeeItem>>() {}.getType(),
@@ -350,7 +358,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchOrderDetails(ApiCallback<List<OrderDetailItem>> callback) {
-        String key = "order_details_" + sessionManager.getStudentId();
+        String key = studentKey("order_details");
         executeCached(
                 key,
                 new TypeToken<List<OrderDetailItem>>() {}.getType(),
@@ -364,7 +372,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchOrderInfo(ApiCallback<OrderInfoRequest> callback) {
-        String key = "order_info_" + sessionManager.getStudentId();
+        String key = studentKey("order_info");
         executeCached(
                 key,
                 OrderInfoRequest.class,
@@ -382,9 +390,9 @@ public class StudentRepositoryImpl implements StudentRepository {
             @Override
             public void onResponse(@NonNull Call<OrderInfoResponse> call, @NonNull Response<OrderInfoResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Invalidate caches
-                    cacheManager.remove("order_info_" + sessionManager.getStudentId());
-                    cacheManager.remove("order_details_" + sessionManager.getStudentId());
+                    // Invalidate student specific caches
+                    cacheManager.remove(studentKey("order_info"));
+                    cacheManager.remove(studentKey("order_details"));
                     callback.onSuccess(response.body());
                 } else {
                     callback.onError("Cập nhật thất bại (" + response.code() + ")");
@@ -404,9 +412,9 @@ public class StudentRepositoryImpl implements StudentRepository {
             @Override
             public void onResponse(@NonNull Call<OrderInfoResponse> call, @NonNull Response<OrderInfoResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Invalidate caches
-                    cacheManager.remove("order_info_" + sessionManager.getStudentId());
-                    cacheManager.remove("order_details_" + sessionManager.getStudentId());
+                    // Invalidate student specific caches
+                    cacheManager.remove(studentKey("order_info"));
+                    cacheManager.remove(studentKey("order_details"));
                     callback.onSuccess(response.body());
                 } else {
                     callback.onError("Xóa thất bại (" + response.code() + ")");
@@ -453,7 +461,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void fetchComments(String year, String term, ApiCallback<List<CommentItem>> callback) {
-        String key = "comments_" + sessionManager.getStudentId() + "_" + year + "_" + term;
+        String key = studentKey("comments_" + year + "_" + term);
         executeCached(
                 key,
                 new TypeToken<List<CommentItem>>() {}.getType(),

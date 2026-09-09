@@ -60,6 +60,8 @@ public class ContactActivity extends BaseStudentActivity {
         etContactContent = findViewById(R.id.etContactContent);
         btnSubmitContact = findViewById(R.id.btnSubmitContact);
 
+        String studentId = vn.edu.mku.portal.data.local.SessionManager.getInstance().getStudentId();
+
         if (etContactSubject != null) {
             etContactSubject.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -70,7 +72,8 @@ public class ContactActivity extends BaseStudentActivity {
                     if (tilContactSubject != null && tilContactSubject.getError() != null) {
                         tilContactSubject.setError(null);
                     }
-                    vn.edu.mku.portal.data.local.DraftManager.getInstance().saveDraft(
+                    vn.edu.mku.portal.data.local.DraftManager.getInstance().saveStudentDraft(
+                            studentId,
                             vn.edu.mku.portal.data.local.DraftManager.FORM_CONTACT,
                             vn.edu.mku.portal.data.local.DraftManager.FIELD_SUBJECT,
                             s != null ? s.toString() : ""
@@ -89,7 +92,8 @@ public class ContactActivity extends BaseStudentActivity {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    vn.edu.mku.portal.data.local.DraftManager.getInstance().saveDraft(
+                    vn.edu.mku.portal.data.local.DraftManager.getInstance().saveStudentDraft(
+                            studentId,
                             vn.edu.mku.portal.data.local.DraftManager.FORM_CONTACT,
                             vn.edu.mku.portal.data.local.DraftManager.FIELD_CONTENT,
                             s != null ? s.toString() : ""
@@ -101,10 +105,10 @@ public class ContactActivity extends BaseStudentActivity {
             });
         }
 
-        // Restore drafts
+        // Restore drafts per student
         vn.edu.mku.portal.data.local.DraftManager dm = vn.edu.mku.portal.data.local.DraftManager.getInstance();
-        String savedSubject = dm.getDraft(vn.edu.mku.portal.data.local.DraftManager.FORM_CONTACT, vn.edu.mku.portal.data.local.DraftManager.FIELD_SUBJECT, "");
-        String savedContent = dm.getDraft(vn.edu.mku.portal.data.local.DraftManager.FORM_CONTACT, vn.edu.mku.portal.data.local.DraftManager.FIELD_CONTENT, "");
+        String savedSubject = dm.getStudentDraft(studentId, vn.edu.mku.portal.data.local.DraftManager.FORM_CONTACT, vn.edu.mku.portal.data.local.DraftManager.FIELD_SUBJECT, "");
+        String savedContent = dm.getStudentDraft(studentId, vn.edu.mku.portal.data.local.DraftManager.FORM_CONTACT, vn.edu.mku.portal.data.local.DraftManager.FIELD_CONTENT, "");
 
         boolean hasRestored = false;
         if (!TextUtils.isEmpty(savedSubject) && etContactSubject != null) {
@@ -382,7 +386,8 @@ public class ContactActivity extends BaseStudentActivity {
             public void onSuccess(String result) {
                 if (btnSubmitContact != null) btnSubmitContact.setEnabled(true);
 
-                vn.edu.mku.portal.data.local.DraftManager.getInstance().clearDraft(vn.edu.mku.portal.data.local.DraftManager.FORM_CONTACT);
+                String sId = vn.edu.mku.portal.data.local.SessionManager.getInstance().getStudentId();
+                vn.edu.mku.portal.data.local.DraftManager.getInstance().clearStudentDraft(sId, vn.edu.mku.portal.data.local.DraftManager.FORM_CONTACT);
 
                 String msg = !TextUtils.isEmpty(result) ? result : getString(R.string.msg_contact_success);
                 Snackbar.make(findViewById(R.id.mainCoordinator), msg, Snackbar.LENGTH_LONG).show();

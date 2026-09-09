@@ -125,8 +125,15 @@ public class OrderDetailActivity extends BaseStudentActivity {
         }
     }
 
+    private SharedPreferences getDeclarationPrefs() {
+        String studentId = vn.edu.mku.portal.data.local.SessionManager.getInstance().getStudentId();
+        String name = PREF_DECLARATION + "_" + (!TextUtils.isEmpty(studentId) ? studentId : "guest");
+        return getSharedPreferences(name, Context.MODE_PRIVATE);
+    }
+
     private void setupDeclarationForm() {
         loadDeclarationData();
+        setupDraftAutoSave();
 
         if (btnSaveDeclaration != null) {
             btnSaveDeclaration.setOnClickListener(v -> saveDeclarationData());
@@ -137,8 +144,37 @@ public class OrderDetailActivity extends BaseStudentActivity {
         }
     }
 
+    private void setupDraftAutoSave() {
+        android.text.TextWatcher watcher = new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                saveCurrentInputsToPrefs();
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        };
+        if (etOrgName != null) etOrgName.addTextChangedListener(watcher);
+        if (etOrgAddress != null) etOrgAddress.addTextChangedListener(watcher);
+        if (etTaxCode != null) etTaxCode.addTextChangedListener(watcher);
+        if (etDeclarationEmail != null) etDeclarationEmail.addTextChangedListener(watcher);
+        if (etBudgetCode != null) etBudgetCode.addTextChangedListener(watcher);
+    }
+
+    private void saveCurrentInputsToPrefs() {
+        String orgName = etOrgName != null && etOrgName.getText() != null ? etOrgName.getText().toString().trim() : "";
+        String orgAddress = etOrgAddress != null && etOrgAddress.getText() != null ? etOrgAddress.getText().toString().trim() : "";
+        String taxCode = etTaxCode != null && etTaxCode.getText() != null ? etTaxCode.getText().toString().trim() : "";
+        String email = etDeclarationEmail != null && etDeclarationEmail.getText() != null ? etDeclarationEmail.getText().toString().trim() : "";
+        String budgetCode = etBudgetCode != null && etBudgetCode.getText() != null ? etBudgetCode.getText().toString().trim() : "";
+        saveLocalPrefs(orgName, orgAddress, taxCode, email, budgetCode);
+    }
+
     private void loadDeclarationData() {
-        SharedPreferences prefs = getSharedPreferences(PREF_DECLARATION, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getDeclarationPrefs();
         if (etOrgName != null) etOrgName.setText(prefs.getString(KEY_ORG_NAME, ""));
         if (etOrgAddress != null) etOrgAddress.setText(prefs.getString(KEY_ORG_ADDRESS, ""));
         if (etTaxCode != null) etTaxCode.setText(prefs.getString(KEY_TAX_CODE, ""));
@@ -180,7 +216,7 @@ public class OrderDetailActivity extends BaseStudentActivity {
     }
 
     private void saveLocalPrefs(String orgName, String orgAddress, String taxCode, String email, String budgetCode) {
-        SharedPreferences prefs = getSharedPreferences(PREF_DECLARATION, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getDeclarationPrefs();
         prefs.edit()
                 .putString(KEY_ORG_NAME, orgName != null ? orgName : "")
                 .putString(KEY_ORG_ADDRESS, orgAddress != null ? orgAddress : "")
@@ -230,7 +266,7 @@ public class OrderDetailActivity extends BaseStudentActivity {
             public void onSuccess(OrderInfoResponse result) {
                 if (btnClearDeclaration != null) btnClearDeclaration.setEnabled(true);
 
-                SharedPreferences prefs = getSharedPreferences(PREF_DECLARATION, Context.MODE_PRIVATE);
+                SharedPreferences prefs = getDeclarationPrefs();
                 prefs.edit().clear().apply();
 
                 if (etOrgName != null) etOrgName.setText("");

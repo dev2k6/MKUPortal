@@ -86,6 +86,10 @@ public class ApiClient {
     private static void handleUnauthorized() {
         if (isHandlingUnauthorized.compareAndSet(false, true)) {
             Context context = MKUApplication.getAppContext();
+            if (context != null) {
+                vn.edu.mku.portal.ui.common.GradeNotificationManager.cancelPeriodicGradeCheck(context);
+            }
+            vn.edu.mku.portal.data.local.AppCacheManager.getInstance().clearMemory();
             SessionManager.getInstance().clearSession();
 
             if (context != null) {
