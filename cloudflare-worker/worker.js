@@ -134,40 +134,40 @@ function formatTelegramMessage(p) {
   const versionCode = p.version_code || 1;
   const buildType = escapeHtml(p.build_type || "release");
 
-  const studentId = escapeHtml(p.student_id || "Khách / Chưa đăng nhập");
-  const screen = escapeHtml(p.active_screen || "Không xác định");
+  const studentId = escapeHtml(p.student_id || "Guest / Not Authenticated");
+  const screen = escapeHtml(p.active_screen || "Unknown Screen");
 
-  const device = escapeHtml(`${p.device_manufacturer || ""} ${p.device_model || "Thiết bị không rõ"}`.trim());
+  const device = escapeHtml(`${p.device_manufacturer || ""} ${p.device_model || "Unknown Device"}`.trim());
   const osInfo = escapeHtml(`Android ${p.android_version || "?"} (API ${p.sdk_int || "?"})`);
 
-  const network = escapeHtml(p.network_type || "Không xác định");
+  const network = escapeHtml(p.network_type || "Unknown");
   const ramInfo = (p.available_ram_mb && p.total_ram_mb)
     ? `${p.available_ram_mb} MB / ${p.total_ram_mb} MB`
-    : "Không rõ";
+    : "N/A";
 
   const timeStr = p.timestamp
-    ? new Date(p.timestamp).toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" })
-    : new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+    ? new Date(p.timestamp).toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" })
+    : new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" });
 
-  const excClass = escapeHtml(p.exception_class || "Ngoại lệ không rõ");
-  const excMessage = escapeHtml(p.exception_message || "Không có thông điệp");
+  const excClass = escapeHtml(p.exception_class || "Unknown Exception");
+  const excMessage = escapeHtml(p.exception_message || "No error message");
 
   // Truncate stacktrace to keep under Telegram 4096 character limit
-  const cleanStack = truncateStackTrace(p.stack_trace || "Không có stacktrace", 2500);
+  const cleanStack = truncateStackTrace(p.stack_trace || "No stacktrace provided", 2500);
 
   return `
-${alertIcon} <b>[${appName}] BÁO CÁO SỰ CỐ ỨNG DỤNG</b> ${alertIcon}
+${alertIcon} <b>[${appName}] APPLICATION CRASH REPORT</b> ${alertIcon}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚙️ <b>Mức độ</b>: ${severity}
-👤 <b>Sinh viên</b>: <code>${studentId}</code>
-📍 <b>Màn hình</b>: <code>${screen}</code>
-📱 <b>Thiết bị</b>: <b>${device}</b> (${osInfo})
-📶 <b>Mạng</b>: <code>${network}</code> | 🧠 <b>RAM trống</b>: <code>${ramInfo}</code>
-🏷️ <b>Phiên bản</b>: <code>v${versionName} (Build ${versionCode}) - ${buildType}</code>
-⏰ <b>Thời gian</b>: <code>${timeStr}</code>
+⚙️ <b>Severity</b>: ${severity}
+👤 <b>Student ID</b>: <code>${studentId}</code>
+📍 <b>Screen</b>: <code>${screen}</code>
+📱 <b>Device</b>: <b>${device}</b> (${osInfo})
+📶 <b>Network</b>: <code>${network}</code> | 🧠 <b>Free RAM</b>: <code>${ramInfo}</code>
+🏷️ <b>Version</b>: <code>v${versionName} (Build ${versionCode}) - ${buildType}</code>
+⏰ <b>Time</b>: <code>${timeStr} (ICT)</code>
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-❌ <b>Loại lỗi</b>: <code>${excClass}</code>
-💬 <b>Thông báo</b>: <i>${excMessage}</i>
+❌ <b>Exception</b>: <code>${excClass}</code>
+💬 <b>Message</b>: <i>${excMessage}</i>
 
 📜 <b>Stack Trace</b>:
 <pre><code class="language-java">${cleanStack}</code></pre>
@@ -185,7 +185,7 @@ function truncateStackTrace(stack, maxLen) {
   const tailLen = Math.floor(maxLen * 0.25);
   const head = stack.substring(0, headLen);
   const tail = stack.substring(stack.length - tailLen);
-  return escapeHtml(`${head}\n\n... [Đã rút gọn ${stack.length - maxLen} ký tự stacktrace] ...\n\n${tail}`);
+  return escapeHtml(`${head}\n\n... [Trimmed ${stack.length - maxLen} characters of stacktrace] ...\n\n${tail}`);
 }
 
 /**
