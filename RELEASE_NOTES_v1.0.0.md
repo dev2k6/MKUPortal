@@ -29,13 +29,13 @@ We are thrilled to announce the initial official release of **MKUPortal (v1.0.0)
 
 | Asset | Type | Size | Description |
 | :--- | :--- | :--- | :--- |
-| `MKUPortal-v1.0.0.apk` | Release APK | ~3.8 MB | Production release package (sideloadable) |
+| `MKUPortal-v1.0.0.apk` | Release APK | ~4.4 MB | Production release package (sideloadable) |
 
 ### 🔒 Checksum Verification
 Verify APK integrity after downloading:
 
 - **File**: `MKUPortal-v1.0.0.apk`
-- **SHA-256**: `280051d1573586e03c00fa9c6a529466f439efede4194a705ec447e57e541762`
+- **SHA-256**: `011e66a9d60b5d7dd0cd7185ed42084c2b404eea60c1401c597a2f2768d6e7f8`
 
 ```bash
 # macOS / Linux

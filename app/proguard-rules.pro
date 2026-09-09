@@ -16,43 +16,55 @@
 -keepclassmembers class * extends com.google.gson.reflect.TypeToken { *; }
 -keep class com.google.gson.reflect.TypeToken { *; }
 -keepclassmembers class com.google.gson.reflect.TypeToken { *; }
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * extends com.google.gson.TypeAdapter
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
 
 -keepclassmembers class * {
     @com.google.gson.annotations.SerializedName <fields>;
     @com.google.gson.annotations.Expose <fields>;
 }
 
-# Keep All Data Models, DTOs and Local Storage Entities
--keep class vn.edu.mku.portal.data.network.model.** { *; }
--keepclassmembers class vn.edu.mku.portal.data.network.model.** { *; }
--keep class vn.edu.mku.portal.data.model.** { *; }
--keepclassmembers class vn.edu.mku.portal.data.model.** { *; }
--keep class vn.edu.mku.portal.data.local.** { *; }
--keepclassmembers class vn.edu.mku.portal.data.local.** { *; }
--keep class vn.edu.mku.portal.data.crash.** { *; }
--keepclassmembers class vn.edu.mku.portal.data.crash.** { *; }
--keep class vn.edu.mku.portal.data.update.** { *; }
--keepclassmembers class vn.edu.mku.portal.data.update.** { *; }
-
-# Keep Retrofit API Service & Interfaces
--keepclassmembers,allowobfuscation interface * {
+# Retrofit & OkHttp & Okio Rules
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keep interface retrofit2.** { *; }
+-keepclasseswithmembers interface * {
     @retrofit2.http.* <methods>;
 }
--keep class vn.edu.mku.portal.data.network.ApiService { *; }
--keep interface vn.edu.mku.portal.data.network.ApiService { *; }
-
-# OkHttp & Okio Rules
 -dontwarn okhttp3.**
 -dontwarn okio.**
 -keep class okhttp3.** { *; }
 -keep interface okhttp3.** { *; }
+-keep class okio.** { *; }
+-keep interface okio.** { *; }
 
-# Android Material & Support Components
+# Android Lifecycle & ViewModel
+-keep class * extends androidx.lifecycle.ViewModel {
+    <init>(...);
+}
+-keep class * extends androidx.lifecycle.AndroidViewModel {
+    <init>(...);
+}
+
+# Android Material & UI Components
 -keep class com.google.android.material.** { *; }
 -dontwarn com.google.android.material.**
+-keep class androidx.appcompat.** { *; }
+-dontwarn androidx.appcompat.**
+-keep class androidx.constraintlayout.** { *; }
+-keep class androidx.recyclerview.widget.** { *; }
 
-# Application Lifecycle, Activities, WorkManager, Services
+# Application Classes, Data Models, Repositories, UI
 -keep class vn.edu.mku.portal.MKUApplication { *; }
+-keep class vn.edu.mku.portal.data.** { *; }
+-keepclassmembers class vn.edu.mku.portal.data.** { *; }
+-keep class vn.edu.mku.portal.domain.** { *; }
+-keepclassmembers class vn.edu.mku.portal.domain.** { *; }
 -keep class vn.edu.mku.portal.service.** { *; }
+-keepclassmembers class vn.edu.mku.portal.service.** { *; }
 -keep class vn.edu.mku.portal.ui.** { *; }
+-keepclassmembers class vn.edu.mku.portal.ui.** { *; }
+
 
