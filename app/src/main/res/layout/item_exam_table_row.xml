@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/rowExamLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp">
+
+        <!-- 1. Mã lớp học phần/Tên lớp học phần -->
+        <TextView
+            android:id="@+id/tvCourseName"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- 2. SBD -->
+        <TextView
+            android:id="@+id/tvSbd"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp" />
+
+        <!-- 3. Lần thi -->
+        <TextView
+            android:id="@+id/tvLanThi"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp" />
+
+        <!-- 4. Ngày thi -->
+        <TextView
+            android:id="@+id/tvNgayThi"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp" />
+
+        <!-- 5. Giờ thi -->
+        <TextView
+            android:id="@+id/tvGioThi"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp" />
+
+        <!-- 6. Phòng thi -->
+        <TextView
+            android:id="@+id/tvPhongThi"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp" />
+
+        <!-- 7. Hình thức thi -->
+        <TextView
+            android:id="@+id/tvHinhThuc"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp" />
+
+        <!-- 8. Kỳ thi -->
+        <TextView
+            android:id="@+id/tvKyThi"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp" />
+
+        <!-- 9. Ghi chú -->
+        <TextView
+            android:id="@+id/tvGhiChu"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp" />
+
+        <!-- 10. Vắng thi -->
+        <TextView
+            android:id="@+id/tvVangThi"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/mku_text_header"
+            android:textSize="13sp" />
+
+        <!-- 11. Link -->
+        <TextView
+            android:id="@+id/tvLink"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/mku_primary_blue"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/mku_divider" />
+
+</LinearLayout>
