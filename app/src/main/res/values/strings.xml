@@ -1,0 +1,267 @@
+<resources>
+    <string name="app_name">MKU Portal</string>
+    <string name="university_name">TRƯỜNG ĐẠI HỌC CỬU LONG</string>
+    <string name="login_header">ĐĂNG NHẬP</string>
+    <string name="login_subtitle">Cổng thông tin đào tạo</string>
+
+    <string name="reset_pwd_header">KHÔI PHỤC MẬT KHẨU</string>
+    <string name="reset_pwd_subtitle">Mật khẩu mới sẽ được gửi về email của bạn</string>
+
+    <string name="label_username">Tên đăng nhập</string>
+    <string name="label_email">Email đăng ký</string>
+    <string name="label_password">Mật khẩu</string>
+    <string name="label_captcha">Mã bảo vệ</string>
+
+    <string name="btn_login">Đăng nhập</string>
+    <string name="btn_reset_password">Gửi yêu cầu khôi phục</string>
+    <string name="btn_back_to_login">Quay về trang đăng nhập</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+
+    <string name="err_username_required">Tên đăng nhập là bắt buộc</string>
+    <string name="err_password_required">Mật khẩu là bắt buộc</string>
+    <string name="err_captcha_required">Vui lòng nhập mã bảo vệ</string>
+    <string name="err_captcha_incorrect">Mã bảo vệ không đúng</string>
+    <string name="err_email_required">Email là bắt buộc</string>
+    <string name="err_email_invalid">Email không đúng định dạng</string>
+
+    <string name="footer_copyright">All Rights Reserved Developed by </string>
+    <string name="footer_author">Thái Nguyên</string>
+
+    <string name="desc_captcha">Mã bảo vệ</string>
+    <string name="desc_refresh_captcha">Làm mới mã bảo vệ</string>
+    <string name="desc_settings">Cài đặt</string>
+
+    <string name="title_student_info">THÔNG TIN SINH VIÊN</string>
+    <string name="section_student_info">Thông tin sinh viên</string>
+    <string name="section_contact_info">Thông tin liên lạc</string>
+    <string name="section_course_info">Thông tin khóa học</string>
+    <string name="section_parent_info">Thông tin người liên hệ</string>
+    <string name="btn_update_personal_info">✏ Cập nhật thông tin cá nhân</string>
+    <string name="text_remove_picture">Xóa ảnh</string>
+
+    <string name="title_notification">Thông báo</string>
+    <string name="text_see_more">Xem thêm</string>
+    <string name="subtitle_student_id">Sinh viên - %s</string>
+
+    <string name="label_my_profile">Hồ sơ của tôi</string>
+    <string name="label_change_password">Đổi mật khẩu</string>
+    <string name="btn_logout">Đăng xuất</string>
+
+    <string name="btn_save_settings">Lưu cài đặt</string>
+    <string name="label_theme">Giao diện</string>
+    <string name="theme_light">Sáng</string>
+    <string name="theme_dark">Tối</string>
+    <string name="theme_system">Theo hệ thống</string>
+    <string name="label_rtl">RTL</string>
+    <string name="sub_rtl">Thay đổi hướng văn bản</string>
+    <string name="label_responsive_font">Cỡ chữ thích ứng</string>
+    <string name="sub_responsive_font">Điều chỉnh cỡ chữ cho thiết bị nhỏ</string>
+    <string name="label_compact">Giao diện thu gọn</string>
+    <string name="sub_compact">Cố định chiều rộng ở một số màn hình</string>
+    <string name="label_rounded_corners">Bo góc viền</string>
+    <string name="sub_rounded_corners">Tăng độ bo góc đường viền</string>
+    <string name="text_no_new_notifications">Không có thông báo mới.</string>
+
+    <string name="lang_english">English</string>
+    <string name="lang_vietnamese">Tiếng Việt</string>
+
+    <string name="title_general_notifications">THÔNG BÁO CHUNG</string>
+    <string name="label_notification_title">Tiêu đề</string>
+    <string name="label_notification_sender">Người gửi</string>
+    <string name="label_notification_sent_time">Thời gian gửi</string>
+    <string name="label_notification_detail">Chi tiết thông báo</string>
+    <string name="btn_close">Đóng</string>
+
+    <string name="title_study_programs">CHƯƠNG TRÌNH ĐÀO TẠO</string>
+    <string name="label_study_program_hint">Chương trình đào tạo</string>
+    <string name="label_stt">STT</string>
+    <string name="label_course_id">MÃ HỌC PHẦN</string>
+    <string name="label_course_name">TÊN HỌC PHẦN</string>
+    <string name="label_sum_compulsory">Cộng học phần bắt buộc</string>
+    <string name="label_sum_elective">Cộng học phần tự chọn</string>
+    <string name="note_curriculum">- Ghi chú : _Những môn có dấu (*) sẽ không tính điểm trung bình mà chỉ là môn điều kiện. Sinh viên tích lũy đủ số tín chỉ trong các nhóm tự chọn sau:</string>
+
+    <string name="title_schedules">THỜI KHÓA BIỂU</string>
+    <string name="label_tab_week">TKB TUẦN</string>
+    <string name="label_tab_period">TKB THỨ - TIẾT</string>
+    <string name="label_year_study">Năm học</string>
+    <string name="label_term">Học kỳ</string>
+    <string name="label_week">Tuần</string>
+    <string name="btn_current_week">Hiện tại</string>
+    <string name="label_col_lhp_name">Mã lớp học phần/Tên lớp học phần</string>
+    <string name="label_col_room">Phòng học</string>
+    <string name="label_col_weeks">Tuần</string>
+    <string name="label_col_campus">Cơ sở</string>
+    <string name="label_col_address">Địa chỉ</string>
+    <string name="label_period">Tiết</string>
+    <string name="msg_sender_date">Người gửi: %1$s | Ngày: %2$s</string>
+    <string name="summary_year_term">Năm học: %1$s - Học kỳ: %2$s</string>
+
+    <string name="title_exam">LỊCH THI</string>
+    <string name="title_decisions">QUYẾT ĐỊNH SINH VIÊN</string>
+    <string name="title_behavior_score">KẾT QUẢ RÈN LUYỆN</string>
+    <string name="title_marks">KẾT QUẢ HỌC TẬP</string>
+
+    <string name="label_decision_number">Số quyết định</string>
+    <string name="label_decision_type">Loại quyết định</string>
+    <string name="label_content">Nội dung</string>
+    <string name="label_sign_date">Ngày ký</string>
+
+    <string name="label_behavior_score">Điểm rèn luyện</string>
+    <string name="label_rank">Xếp loại</string>
+
+    <string name="label_col_course_code">Mã môn học</string>
+    <string name="label_col_course_title">Tên môn học</string>
+    <string name="label_col_credits">Số TC</string>
+    <string name="label_col_grade10">Điểm hệ 10</string>
+    <string name="label_col_grade4">Điểm hệ 4</string>
+    <string name="label_col_grade_char">Điểm chữ</string>
+    <string name="label_col_result">Kết quả</string>
+    <string name="label_col_detail">Chi tiết</string>
+
+    <string name="label_all">Tất cả</string>
+    <string name="btn_prev_week">⏮</string>
+    <string name="btn_next_week">⏭</string>
+    <string name="lang_switched_en">Language switched to English</string>
+    <string name="lang_switched_vi">Đã đổi sang Tiếng Việt</string>
+
+    <string name="label_tab_year_term">NĂM HỌC - HỌC KỲ</string>
+    <string name="label_tab_date_range">THỜI GIAN</string>
+    <string name="err_server_connection">Lỗi kết nối máy chủ: %s</string>
+    <string name="err_network_connection">Lỗi kết nối mạng: %s</string>
+    <string name="err_load_data">Không thể tải dữ liệu (%d)</string>
+
+    <string name="label_academic_year_prefix">Năm học: %s</string>
+    <string name="label_term_prefix">Học kỳ: %s</string>
+    <string name="text_loading_mark_details">Đang tải chi tiết điểm...</string>
+    <string name="summary_marks_banner">Tín chỉ đạt HK: %1$s | TB HK (Hệ 10): %2$s | TB HK (Hệ 4): %3$s\nTổng TC tích lũy: %4$s/%5$s | TB TL (Hệ 10): %6$s | TB TL (Hệ 4): %7$s\nĐiểm rèn luyện HK: %8$s</string>
+
+    <string name="title_behavior_score_student">ĐIỂM RÈN LUYỆN SINH VIÊN</string>
+    <string name="label_total_score">Tổng điểm</string>
+    <string name="label_year_behavior_banner">Năm học: %1$s\nĐiểm rèn luyện cả năm học: %2$s\nXếp loại rèn luyện cả năm học: %3$s</string>
+    <string name="label_overall_behavior_banner">Điểm rèn luyện toàn khóa : %1$s\nXếp loại toàn khóa : %2$s</string>
+    <string name="msg_session_expired">Phiên đăng nhập hết hạn vui lòng đăng nhập lại</string>
+    <string name="label_compulsory">Bắt buộc</string>
+    <string name="label_elective">Tự chọn</string>
+    <string name="label_term_num">Học kỳ %d</string>
+
+    <string name="title_confirm_payment">XÁC NHẬN THANH TOÁN</string>
+    <string name="btn_pay_tuition">Thanh toán học phí</string>
+    <string name="btn_exit">Thoát</string>
+    <string name="note_payment_warning">Sinh viên/Học viên có nhu cầu xuất hóa đơn theo địa chỉ cơ quan, cần khai báo thông tin xuất hóa đơn vào mục \"Tra cứu thông tin -> Chi tiết hóa đơn -> Khai báo\" trước khi thanh toán học phí.</string>
+
+    <string name="label_fee_code_name">Mã phí - Tên phí</string>
+    <string name="label_regist_type">Hình thức ĐK</string>
+    <string name="label_must_pay">Phải đóng</string>
+    <string name="label_paid">Đã đóng</string>
+    <string name="label_discount">Miễn giảm</string>
+    <string name="label_debt">Còn nợ</string>
+    <string name="label_paid_date">Ngày đóng</string>
+    <string name="label_payment_content">Nội dung thu</string>
+    <string name="label_total_tuition">Tổng học phí</string>
+
+    <!-- Profile Field Labels -->
+    <string name="label_student_id">Mã sinh viên</string>
+    <string name="label_gender">Giới tính</string>
+    <string name="label_date_of_birth">Ngày sinh</string>
+    <string name="label_ethnicity">Dân tộc</string>
+    <string name="label_religion">Tôn giáo</string>
+    <string name="label_place_of_birth">Nơi sinh</string>
+    <string name="label_id_card">CCCD / CMND</string>
+    <string name="label_phone">Điện thoại</string>
+    <string name="label_mobile">Di động</string>
+    <string name="label_contact_address">Địa chỉ liên lạc</string>
+    <string name="label_permanent_address">Địa chỉ thường trú</string>
+    <string name="label_class">Lớp học</string>
+    <string name="label_faculty">Khoa quản lý</string>
+    <string name="label_major">Ngành đào tạo</string>
+    <string name="label_course">Khóa học</string>
+    <string name="label_training_type">Hình thức đào tạo</string>
+    <string name="label_father_name">Họ tên cha</string>
+    <string name="label_mother_name">Họ tên mẹ</string>
+    <string name="label_parents_address">Địa chỉ cha mẹ</string>
+
+    <!-- Side Menu Titles -->
+    <string name="menu_personal_info">Thông tin cá nhân</string>
+    <string name="menu_notifications">Thông báo</string>
+    <string name="menu_academic_programs">Chương trình đào tạo</string>
+    <string name="menu_schedule">Lịch học</string>
+    <string name="menu_exam_schedule">Lịch thi</string>
+    <string name="menu_student_decisions">Quyết định sinh viên</string>
+    <string name="menu_behavior_score">Kết quả rèn luyện</string>
+    <string name="menu_student_grade">Kết quả học tập</string>
+    <string name="menu_student_finance">Tài chính sinh viên</string>
+    <string name="menu_invoice_details">Chi tiết hóa đơn</string>
+    <string name="menu_discussion">Ý kiến - Thảo luận</string>
+    <string name="menu_contact_feedback">Liên hệ - góp ý</string>
+
+    <!-- Order Detail / Invoice Strings -->
+    <string name="title_order_detail">CHI TIẾT HÓA ĐƠN</string>
+    <string name="label_tab_order_detail">CHI TIẾT</string>
+    <string name="label_tab_declaration">KHAI BÁO</string>
+    <string name="label_col_invoice_no">Số hóa đơn</string>
+    <string name="label_col_payment_content">Nội dung thu</string>
+    <string name="label_col_payment_date">Ngày đóng</string>
+    <string name="label_col_payment_method">Hình thức nộp tiền</string>
+    <string name="label_col_amount">Thành tiền</string>
+    <string name="label_col_e_invoice">Hóa đơn điện tử</string>
+    <string name="label_download_invoice">[Tải hóa đơn]</string>
+    <string name="hint_org_name">Tên cơ quan/đơn vị</string>
+    <string name="hint_org_address">Địa chỉ cơ quan/đơn vị</string>
+    <string name="hint_tax_code">Mã số thuế</string>
+    <string name="hint_declaration_email">Email</string>
+    <string name="hint_budget_code">Mã quan hệ ngân sách</string>
+    <string name="btn_update_declaration">Cập nhật thông tin</string>
+    <string name="btn_clear_declaration">Xóa thông tin</string>
+    <string name="msg_declaration_saved">Đã cập nhật thông tin khai báo hóa đơn</string>
+    <string name="msg_declaration_cleared">Đã xóa thông tin khai báo hóa đơn</string>
+    <string name="label_symbol">Ký hiệu</string>
+    <string name="label_fee_type">Tên phí</string>
+    <string name="label_fee_code">Mã phí</string>
+    <string name="label_paid_amount">Đã đóng</string>
+    <string name="label_dialog_order_detail_title">THÔNG TIN CHI TIẾT HÓA ĐƠN</string>
+
+    <!-- Change Password Strings -->
+    <string name="title_change_password">ĐỔI MẬT KHẨU</string>
+    <string name="hint_old_password">Mật khẩu cũ</string>
+    <string name="hint_new_password">Mật khẩu mới</string>
+    <string name="hint_confirm_new_password">Nhập lại mật khẩu mới</string>
+    <string name="err_old_password_required">Mật khẩu cũ là bắt buộc</string>
+    <string name="err_new_password_required">Mật khẩu mới là bắt buộc</string>
+    <string name="err_confirm_password_required">Nhập lại mật khẩu mới là bắt buộc</string>
+    <string name="err_confirm_password_mismatch">Mật khẩu nhập lại không khớp</string>
+    <string name="btn_submit_change_password">Đổi mật khẩu</string>
+
+    <!-- Redesigned Exam Strings -->
+    <string name="label_upcoming_exams">Lịch chưa thi</string>
+    <string name="label_col_sbd">SBD</string>
+    <string name="label_col_lan_thi">Lần thi</string>
+    <string name="label_col_ngay_thi">Ngày thi</string>
+    <string name="label_col_gio_thi">Giờ thi</string>
+    <string name="label_col_phong_thi">Phòng thi</string>
+    <string name="label_col_hinh_thuc_thi">Hình thức thi</string>
+    <string name="label_col_ky_thi">Kỳ thi</string>
+    <string name="label_col_ghi_chu">Ghi chú</string>
+    <string name="label_col_vang_thi">Vắng thi</string>
+    <string name="label_col_link">Link</string>
+    <string name="notice_exam_content">1. Thi tập trung tại phòng thi\n+ Người học có mặt tại phòng thi trước giờ thi 15 phút.\n+ Người học xuất trình thẻ sinh viên/học viên.\n+ Người học thực hiện đúng qui chế thi và hướng dẫn của Cán bộ coi thi.\n2. Thi trực tuyến (online)\n+ Người học mở máy tính, đăng nhập hệ thống trước giờ thi 30 phút.\n+ Người học thực hiện đúng qui chế thi và hướng dẫn của Cán bộ coi thi.\n  a. Hướng dẫn thi trực tuyến (online): Tải file\n  b. Hướng dẫn sử dụng Microsoft Teams: Tải file\n\n3. Ghi chú\n+ Sinh viên vui lòng theo dõi lịch thi thường xuyên để biết thông tin.\n+ Những học phần chữ màu đen là lịch thi đã qua.\n+ Những học phần chữ màu xanh là lịch thi sắp tới.\n+ Những học phần chữ màu đỏ là những học phần bị cấm thi.</string>
+
+    <!-- Discussion Strings -->
+    <string name="title_discussion_header">Ý KIẾN THẢO LUẬN</string>
+    <string name="label_col_info">Thông tin</string>
+    <string name="label_col_lecturer">Giảng viên</string>
+    <string name="label_col_list">Danh sách</string>
+    <string name="label_col_discussion">Thảo luận</string>
+    <string name="text_no_data">Chưa có dữ liệu</string>
+
+    <!-- Contact / Feedback Strings -->
+    <string name="title_contact_header">LIÊN HỆ - GÓP Ý</string>
+    <string name="hint_department">Phòng ban</string>
+    <string name="hint_subject">Tiêu đề</string>
+    <string name="hint_content">Nội dung</string>
+    <string name="btn_send">Gửi</string>
+    <string name="msg_contact_success">Gửi thông tin liên hệ - góp ý thành công!</string>
+    <string name="err_department_required">Vui lòng chọn phòng ban</string>
+    <string name="err_subject_required">Vui lòng nhập tiêu đề</string>
+    <string name="err_content_required">Vui lòng nhập nội dung</string>
+</resources>

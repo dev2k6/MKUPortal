@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Mode Palette based on official MKU Portal Dark Theme -->
+    <color name="black">#FFFFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Brand Colors -->
+    <color name="mku_primary_blue">#0078D4</color>
+    <color name="mku_primary_dark">#0E1722</color>
+    <color name="mku_toolbar_bg">#1A2332</color>
+    <color name="mku_title_blue">#2196F3</color>
+
+    <!-- Background & Surface -->
+    <color name="mku_bg_light">#121820</color>
+    <color name="mku_card_bg">#1B2430</color>
+    <color name="mku_card_stroke">#273342</color>
+    <color name="mku_divider">#273342</color>
+
+    <!-- Text Colors -->
+    <color name="mku_text_header">#E1E7ED</color>
+    <color name="mku_text_sub">#8C9DAE</color>
+    <color name="mku_text_body">#C2CEDA</color>
+    <color name="mku_link_text">#2196F3</color>
+
+    <!-- Captcha Colors -->
+    <color name="captcha_bg">#A8E6CF</color>
+    <color name="captcha_text">#121820</color>
+    <color name="captcha_refresh">#FF7043</color>
+
+    <!-- FAB Action Button -->
+    <color name="fab_bg">#0078D4</color>
+
+    <!-- Error / Helper Color -->
+    <color name="error_red">#E53935</color>
+</resources>

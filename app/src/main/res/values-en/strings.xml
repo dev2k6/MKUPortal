@@ -1,0 +1,267 @@
+<resources>
+    <string name="app_name">MKU Portal</string>
+    <string name="university_name">MEKONG UNIVERSITY</string>
+    <string name="login_header">LOGIN</string>
+    <string name="login_subtitle">Academic Portal</string>
+
+    <string name="reset_pwd_header">FORGOT PASSWORD</string>
+    <string name="reset_pwd_subtitle">New password will be sent to your email</string>
+
+    <string name="label_username">Username</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_captcha">Security Code</string>
+
+    <string name="btn_login">Login</string>
+    <string name="btn_reset_password">Send Reset Request</string>
+    <string name="btn_back_to_login">Back to login page</string>
+    <string name="forgot_password">Forgot password?</string>
+
+    <string name="err_username_required">Username is required</string>
+    <string name="err_password_required">Password is required</string>
+    <string name="err_captcha_required">Security code is required</string>
+    <string name="err_captcha_incorrect">Incorrect security code</string>
+    <string name="err_email_required">Email is required</string>
+    <string name="err_email_invalid">Malformed email</string>
+
+    <string name="footer_copyright">All Rights Reserved Developed by </string>
+    <string name="footer_author">Thái Nguyên</string>
+
+    <string name="desc_captcha">Security Code</string>
+    <string name="desc_refresh_captcha">Refresh Security Code</string>
+    <string name="desc_settings">Settings</string>
+
+    <string name="title_student_info">STUDENT INFORMATION</string>
+    <string name="section_student_info">Student Information</string>
+    <string name="section_contact_info">Contact Information</string>
+    <string name="section_course_info">Course Information</string>
+    <string name="section_parent_info">Contact Person Information</string>
+    <string name="btn_update_personal_info">✏ Update Personal Info</string>
+    <string name="text_remove_picture">Remove Picture</string>
+
+    <string name="title_notification">Notifications</string>
+    <string name="text_see_more">See more</string>
+    <string name="subtitle_student_id">Student - %s</string>
+
+    <string name="label_my_profile">My Profile</string>
+    <string name="label_change_password">Change Password</string>
+    <string name="btn_logout">Logout</string>
+
+    <string name="btn_save_settings">Save Settings</string>
+    <string name="label_theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">System Default</string>
+    <string name="label_rtl">RTL</string>
+    <string name="sub_rtl">Change text direction</string>
+    <string name="label_responsive_font">Responsive font sizes</string>
+    <string name="sub_responsive_font">Adjust font for small devices</string>
+    <string name="label_compact">Compact</string>
+    <string name="sub_compact">Fixed width on some screens</string>
+    <string name="label_rounded_corners">Rounded Corners</string>
+    <string name="sub_rounded_corners">Increase border radius</string>
+    <string name="text_no_new_notifications">No new notifications.</string>
+
+    <string name="lang_english">English</string>
+    <string name="lang_vietnamese">Vietnamese</string>
+
+    <string name="title_general_notifications">GENERAL NOTIFICATIONS</string>
+    <string name="label_notification_title">Title</string>
+    <string name="label_notification_sender">Sender</string>
+    <string name="label_notification_sent_time">Sent Time</string>
+    <string name="label_notification_detail">Notification Detail</string>
+    <string name="btn_close">Close</string>
+
+    <string name="title_study_programs">ACADEMIC PROGRAM</string>
+    <string name="label_study_program_hint">Academic Program</string>
+    <string name="label_stt">NO</string>
+    <string name="label_course_id">COURSE ID</string>
+    <string name="label_course_name">COURSE NAME</string>
+    <string name="label_sum_compulsory">Sum compulsory courses</string>
+    <string name="label_sum_elective">Sum elective courses</string>
+    <string name="note_curriculum">- Note: Courses marked with (*) do not count towards average grade but are condition courses.</string>
+
+    <string name="title_schedules">SCHEDULES</string>
+    <string name="label_tab_week">WEEKLY SCHEDULE</string>
+    <string name="label_tab_period">PERIOD SCHEDULE</string>
+    <string name="label_year_study">Academic Year</string>
+    <string name="label_term">Term</string>
+    <string name="label_week">Week</string>
+    <string name="btn_current_week">Current Week</string>
+    <string name="label_col_lhp_name">Course Class ID &amp; Name</string>
+    <string name="label_col_room">Room</string>
+    <string name="label_col_weeks">Weeks</string>
+    <string name="label_col_campus">Campus</string>
+    <string name="label_col_address">Address</string>
+    <string name="label_period">Period</string>
+    <string name="msg_sender_date">Sender: %1$s | Date: %2$s</string>
+    <string name="summary_year_term">Academic Year: %1$s - Term: %2$s</string>
+
+    <string name="title_exam">EXAM SCHEDULE</string>
+    <string name="title_decisions">STUDENT DECISIONS</string>
+    <string name="title_behavior_score">BEHAVIOR SCORE</string>
+    <string name="title_marks">ACADEMIC RESULTS</string>
+
+    <string name="label_decision_number">Decision No.</string>
+    <string name="label_decision_type">Decision Type</string>
+    <string name="label_content">Content</string>
+    <string name="label_sign_date">Sign Date</string>
+
+    <string name="label_behavior_score">Behavior Score</string>
+    <string name="label_rank">Rank</string>
+
+    <string name="label_col_course_code">Course Code</string>
+    <string name="label_col_course_title">Course Title</string>
+    <string name="label_col_credits">Credits</string>
+    <string name="label_col_grade10">Scale 10</string>
+    <string name="label_col_grade4">Scale 4</string>
+    <string name="label_col_grade_char">Letter Grade</string>
+    <string name="label_col_result">Result</string>
+    <string name="label_col_detail">Detail</string>
+
+    <string name="label_all">All</string>
+    <string name="btn_prev_week">⏮</string>
+    <string name="btn_next_week">⏭</string>
+    <string name="lang_switched_en">Language switched to English</string>
+    <string name="lang_switched_vi">Switched to Vietnamese</string>
+
+    <string name="label_tab_year_term">YEAR - TERM</string>
+    <string name="label_tab_date_range">DATE RANGE</string>
+    <string name="err_server_connection">Server connection error: %s</string>
+    <string name="err_network_connection">Network connection error: %s</string>
+    <string name="err_load_data">Failed to load data (%d)</string>
+
+    <string name="label_academic_year_prefix">Academic Year: %s</string>
+    <string name="label_term_prefix">Term: %s</string>
+    <string name="text_loading_mark_details">Loading mark details…</string>
+    <string name="summary_marks_banner">Term Credits Passed: %1$s | Term GPA (10): %2$s | Term GPA (4): %3$s\nCum. Credits: %4$s/%5$s | Cum. GPA (10): %6$s | Cum. GPA (4): %7$s\nTerm Behavior Score: %8$s</string>
+
+    <string name="title_behavior_score_student">STUDENT BEHAVIOR SCORE</string>
+    <string name="label_total_score">Total Score</string>
+    <string name="label_year_behavior_banner">Academic Year: %1$s\nYear Behavior Score: %2$s\nYear Behavior Rank: %3$s</string>
+    <string name="label_overall_behavior_banner">Overall Behavior Score: %1$s\nOverall Rank: %2$s</string>
+    <string name="msg_session_expired">Session expired, please login again</string>
+    <string name="label_compulsory">Compulsory</string>
+    <string name="label_elective">Elective</string>
+    <string name="label_term_num">Term %d</string>
+
+    <string name="title_confirm_payment">PAYMENT CONFIRMATION</string>
+    <string name="btn_pay_tuition">Pay Tuition Fee</string>
+    <string name="btn_exit">Exit</string>
+    <string name="note_payment_warning">Students who need an invoice with company address should declare invoice information in \"Information Lookup -> Invoice Details -> Declaration\" before paying tuition fees.</string>
+
+    <string name="label_fee_code_name">Fee ID &amp; Name</string>
+    <string name="label_regist_type">Reg. Type</string>
+    <string name="label_must_pay">Debt Amount</string>
+    <string name="label_paid">Paid Amount</string>
+    <string name="label_discount">Discount</string>
+    <string name="label_debt">Remaining Debt</string>
+    <string name="label_paid_date">Paid Date</string>
+    <string name="label_payment_content">Payment Note</string>
+    <string name="label_total_tuition">Total Tuition</string>
+
+    <!-- Profile Field Labels -->
+    <string name="label_student_id">Student ID</string>
+    <string name="label_gender">Gender</string>
+    <string name="label_date_of_birth">Date of Birth</string>
+    <string name="label_ethnicity">Ethnicity</string>
+    <string name="label_religion">Religion</string>
+    <string name="label_place_of_birth">Place of Birth</string>
+    <string name="label_id_card">ID Card / Passport</string>
+    <string name="label_phone">Phone</string>
+    <string name="label_mobile">Mobile</string>
+    <string name="label_contact_address">Contact Address</string>
+    <string name="label_permanent_address">Permanent Address</string>
+    <string name="label_class">Class</string>
+    <string name="label_faculty">Faculty</string>
+    <string name="label_major">Major</string>
+    <string name="label_course">Academic Course</string>
+    <string name="label_training_type">Training Type</string>
+    <string name="label_father_name">Father\'s Name</string>
+    <string name="label_mother_name">Mother\'s Name</string>
+    <string name="label_parents_address">Parents\' Address</string>
+
+    <!-- Side Menu Titles -->
+    <string name="menu_personal_info">Personal information</string>
+    <string name="menu_notifications">Notifications</string>
+    <string name="menu_academic_programs">Academic program</string>
+    <string name="menu_schedule">Schedule</string>
+    <string name="menu_exam_schedule">Exam schedule</string>
+    <string name="menu_student_decisions">Student decisions</string>
+    <string name="menu_behavior_score">Behavior score</string>
+    <string name="menu_student_grade">Student grade</string>
+    <string name="menu_student_finance">Student finance</string>
+    <string name="menu_invoice_details">Invoice details</string>
+    <string name="menu_discussion">Discussion</string>
+    <string name="menu_contact_feedback">Contact - Feedback</string>
+
+    <!-- Order Detail / Invoice Strings -->
+    <string name="title_order_detail">INVOICE DETAILS</string>
+    <string name="label_tab_order_detail">DETAILS</string>
+    <string name="label_tab_declaration">DECLARATION</string>
+    <string name="label_col_invoice_no">Invoice No</string>
+    <string name="label_col_payment_content">Collection Content</string>
+    <string name="label_col_payment_date">Payment Date</string>
+    <string name="label_col_payment_method">Payment Method</string>
+    <string name="label_col_amount">Amount</string>
+    <string name="label_col_e_invoice">E-Invoice</string>
+    <string name="label_download_invoice">[Download Invoice]</string>
+    <string name="hint_org_name">Organization / Unit Name</string>
+    <string name="hint_org_address">Organization Address</string>
+    <string name="hint_tax_code">Tax Code</string>
+    <string name="hint_declaration_email">Email</string>
+    <string name="hint_budget_code">Budget Relation Code</string>
+    <string name="btn_update_declaration">Update Information</string>
+    <string name="btn_clear_declaration">Clear Information</string>
+    <string name="msg_declaration_saved">Invoice declaration information updated</string>
+    <string name="msg_declaration_cleared">Invoice declaration information cleared</string>
+    <string name="label_symbol">Symbol</string>
+    <string name="label_fee_type">Fee Name</string>
+    <string name="label_fee_code">Fee Code</string>
+    <string name="label_paid_amount">Paid Amount</string>
+    <string name="label_dialog_order_detail_title">INVOICE DETAIL INFORMATION</string>
+
+    <!-- Change Password Strings -->
+    <string name="title_change_password">CHANGE PASSWORD</string>
+    <string name="hint_old_password">Old Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_confirm_new_password">Confirm New Password</string>
+    <string name="err_old_password_required">Old password is required</string>
+    <string name="err_new_password_required">New password is required</string>
+    <string name="err_confirm_password_required">Confirm password is required</string>
+    <string name="err_confirm_password_mismatch">Passwords do not match</string>
+    <string name="btn_submit_change_password">Change Password</string>
+
+    <!-- Redesigned Exam Strings -->
+    <string name="label_upcoming_exams">Upcoming Exams</string>
+    <string name="label_col_sbd">Reg No</string>
+    <string name="label_col_lan_thi">Attempt</string>
+    <string name="label_col_ngay_thi">Exam Date</string>
+    <string name="label_col_gio_thi">Exam Time</string>
+    <string name="label_col_phong_thi">Room</string>
+    <string name="label_col_hinh_thuc_thi">Form</string>
+    <string name="label_col_ky_thi">Exam Term</string>
+    <string name="label_col_ghi_chu">Note</string>
+    <string name="label_col_vang_thi">Absent</string>
+    <string name="label_col_link">Link</string>
+    <string name="notice_exam_content">1. Concentrated exam at examination room\n+ Students arrive 15 minutes before the exam time.\n+ Present student ID card.\n+ Comply with exam rules and proctor instructions.\n2. Online exam\n+ Log in 30 minutes before exam time.\n+ Comply with exam rules and proctor instructions.\n  a. Online exam guidelines: Download\n  b. Microsoft Teams user guide: Download\n\n3. Notes\n+ Please follow the exam schedule regularly.\n+ Black text indicates past exams.\n+ Blue text indicates upcoming exams.\n+ Red text indicates forbidden exams.</string>
+
+    <!-- Discussion Strings -->
+    <string name="title_discussion_header">DISCUSSION COMMENTS</string>
+    <string name="label_col_info">Info</string>
+    <string name="label_col_lecturer">Lecturer</string>
+    <string name="label_col_list">List</string>
+    <string name="label_col_discussion">Discussion</string>
+    <string name="text_no_data">No data available</string>
+
+    <!-- Contact / Feedback Strings -->
+    <string name="title_contact_header">CONTACT - FEEDBACK</string>
+    <string name="hint_department">Department</string>
+    <string name="hint_subject">Subject</string>
+    <string name="hint_content">Content</string>
+    <string name="btn_send">Send</string>
+    <string name="msg_contact_success">Contact &amp; feedback sent successfully!</string>
+    <string name="err_department_required">Please select a department</string>
+    <string name="err_subject_required">Please enter subject</string>
+    <string name="err_content_required">Please enter content</string>
+</resources>

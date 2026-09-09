@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Brand Colors -->
+    <color name="mku_primary_blue">#0055A5</color>
+    <color name="mku_primary_dark">#003E7E</color>
+    <color name="mku_toolbar_bg">#0055A5</color>
+    <color name="mku_title_blue">#0A4D92</color>
+
+    <!-- Background & Surface -->
+    <color name="mku_bg_light">#F3F5F9</color>
+    <color name="mku_card_bg">#FFFFFFFF</color>
+    <color name="mku_card_stroke">#E2E8F0</color>
+    <color name="mku_divider">#E8ECEF</color>
+
+    <!-- Text Colors -->
+    <color name="mku_text_header">#102A43</color>
+    <color name="mku_text_sub">#627D98</color>
+    <color name="mku_text_body">#334E68</color>
+    <color name="mku_link_text">#627D98</color>
+
+    <!-- Captcha Colors -->
+    <color name="captcha_bg">#A8E6CF</color>
+    <color name="captcha_text">#1B381E</color>
+    <color name="captcha_refresh">#E65100</color>
+
+    <!-- FAB Action Button -->
+    <color name="fab_bg">#004B8D</color>
+
+    <!-- Error / Helper Color -->
+    <color name="error_red">#D32F2F</color>
+</resources>

@@ -1,0 +1,14 @@
+<resources>
+    <style name="Base.Theme.MKUPortal" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/mku_primary_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/mku_primary_dark</item>
+        <item name="colorSurface">@color/mku_card_bg</item>
+        <item name="colorOnSurface">@color/mku_text_header</item>
+        <item name="android:windowBackground">@color/mku_bg_light</item>
+        <item name="android:statusBarColor">@color/mku_primary_blue</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.MKUPortal" parent="Base.Theme.MKUPortal" />
+</resources>
