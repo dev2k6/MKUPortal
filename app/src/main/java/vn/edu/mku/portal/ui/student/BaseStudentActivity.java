@@ -33,6 +33,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import vn.edu.mku.portal.R;
+import vn.edu.mku.portal.data.local.AppCacheManager;
 import vn.edu.mku.portal.data.local.LanguageManager;
 import vn.edu.mku.portal.data.local.SessionManager;
 import vn.edu.mku.portal.data.local.SettingsManager;
@@ -40,6 +41,7 @@ import vn.edu.mku.portal.data.network.model.MenuItem;
 import vn.edu.mku.portal.data.network.model.StudentMessage;
 import vn.edu.mku.portal.data.repository.StudentRepository;
 import vn.edu.mku.portal.data.repository.StudentRepositoryImpl;
+import vn.edu.mku.portal.ui.common.NetworkMonitor;
 import vn.edu.mku.portal.ui.login.LoginActivity;
 
 public abstract class BaseStudentActivity extends AppCompatActivity {
@@ -57,6 +59,10 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
     protected TextView tvDrawerStudentSub;
     protected LinearLayout containerDrawerMenu;
     protected FloatingActionButton fabAction;
+
+    protected View layoutOfflineBanner;
+    protected TextView tvOfflineStatus;
+    private boolean wasPreviouslyOffline = false;
 
     protected List<StudentMessage> cachedMessages;
 
@@ -139,9 +145,43 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
         SessionManager session = SessionManager.getInstance();
         updateDrawerHeaderText(session.getStudentName(), session.getStudentId());
 
+        layoutOfflineBanner = findViewById(R.id.layoutOfflineBanner);
+        tvOfflineStatus = findViewById(R.id.tvOfflineStatus);
+        setupNetworkObserver();
+
         loadCommonData();
 
         LanguageManager.getInstance().getLanguageLiveData().observe(this, map -> onLanguageChanged());
+    }
+
+    private void setupNetworkObserver() {
+        if (layoutOfflineBanner == null) return;
+
+        NetworkMonitor.getInstance().getIsConnectedLiveData().observe(this, isOnline -> {
+            if (isOnline == null) return;
+            if (!isOnline) {
+                wasPreviouslyOffline = true;
+                layoutOfflineBanner.setVisibility(View.VISIBLE);
+                layoutOfflineBanner.setBackgroundColor(0xFFD97706);
+                if (tvOfflineStatus != null) {
+                    tvOfflineStatus.setText(getString(R.string.text_offline_mode));
+                }
+            } else if (wasPreviouslyOffline) {
+                wasPreviouslyOffline = false;
+                layoutOfflineBanner.setVisibility(View.VISIBLE);
+                layoutOfflineBanner.setBackgroundColor(0xFF059669);
+                if (tvOfflineStatus != null) {
+                    tvOfflineStatus.setText(getString(R.string.text_online_restored));
+                }
+                layoutOfflineBanner.postDelayed(() -> {
+                    if (layoutOfflineBanner != null) {
+                        layoutOfflineBanner.setVisibility(View.GONE);
+                    }
+                }, 2000);
+            } else {
+                layoutOfflineBanner.setVisibility(View.GONE);
+            }
+        });
     }
 
     protected void updateDrawerHeaderText(String name, String id) {
@@ -507,6 +547,7 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
 
         btnLogout.setOnClickListener(v -> {
             popupWindow.dismiss();
+            AppCacheManager.getInstance().clearUserCache();
             SessionManager.getInstance().clearSession();
             Toast.makeText(this, getString(R.string.btn_logout), Toast.LENGTH_SHORT).show();
             redirectToLogin();

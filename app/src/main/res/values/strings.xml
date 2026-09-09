@@ -264,4 +264,10 @@
     <string name="err_department_required">Vui lòng chọn phòng ban</string>
     <string name="err_subject_required">Vui lòng nhập tiêu đề</string>
     <string name="err_content_required">Vui lòng nhập nội dung</string>
+
+    <!-- Offline and Cache Strings -->
+    <string name="text_offline_mode">⚠️ Chế độ ngoại tuyến - Đang hiển thị dữ liệu lưu tạm</string>
+    <string name="text_online_restored">✓ Đã kết nối lại Internet</string>
+    <string name="text_draft_restored">Đã khôi phục bản nháp chưa gửi</string>
+    <string name="text_no_network_no_cache">Không có kết nối Internet và chưa có dữ liệu lưu tạm.</string>
 </resources>

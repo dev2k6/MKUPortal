@@ -264,4 +264,10 @@
     <string name="err_department_required">Please select a department</string>
     <string name="err_subject_required">Please enter subject</string>
     <string name="err_content_required">Please enter content</string>
+
+    <!-- Offline and Cache Strings -->
+    <string name="text_offline_mode">⚠️ Offline Mode - Showing cached data</string>
+    <string name="text_online_restored">✓ Internet connection restored</string>
+    <string name="text_draft_restored">Restored unfinished draft</string>
+    <string name="text_no_network_no_cache">No Internet connection and no cached data available.</string>
 </resources>

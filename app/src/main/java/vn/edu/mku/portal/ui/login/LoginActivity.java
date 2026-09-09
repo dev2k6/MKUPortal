@@ -153,6 +153,35 @@ public class LoginActivity extends AppCompatActivity {
         clearErrorOnType(etPassword, tilPassword);
         clearErrorOnType(etCaptcha, tilCaptcha);
 
+        // Auto-save username draft as user types
+        etUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                vn.edu.mku.portal.data.local.DraftManager.getInstance().saveDraft(
+                        vn.edu.mku.portal.data.local.DraftManager.FORM_LOGIN,
+                        vn.edu.mku.portal.data.local.DraftManager.FIELD_USERNAME,
+                        s != null ? s.toString().trim() : ""
+                );
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        // Restore draft username if exists
+        String savedUser = vn.edu.mku.portal.data.local.DraftManager.getInstance().getDraft(
+                vn.edu.mku.portal.data.local.DraftManager.FORM_LOGIN,
+                vn.edu.mku.portal.data.local.DraftManager.FIELD_USERNAME,
+                ""
+        );
+        if (!TextUtils.isEmpty(savedUser) && TextUtils.isEmpty(etUsername.getText())) {
+            etUsername.setText(savedUser);
+            etUsername.setSelection(savedUser.length());
+        }
+
         btnLogin.setOnClickListener(v -> performLogin());
     }
 
@@ -174,6 +203,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void performLogin() {
+        if (!vn.edu.mku.portal.ui.common.NetworkMonitor.getInstance().isOnline()) {
+            Snackbar.make(findViewById(R.id.mainCoordinator), getString(R.string.text_no_network_no_cache), Snackbar.LENGTH_LONG).show();
+            return;
+        }
+
         String username = etUsername.getText() != null ? etUsername.getText().toString().trim() : "";
         String password = etPassword.getText() != null ? etPassword.getText().toString().trim() : "";
         String captchaInput = etCaptcha.getText() != null ? etCaptcha.getText().toString().trim() : "";

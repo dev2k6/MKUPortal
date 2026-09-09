@@ -117,6 +117,52 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         clearErrorOnType(etUsername, tilUsername);
         clearErrorOnType(etEmail, tilEmail);
 
+        // Auto-save drafts
+        etUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                vn.edu.mku.portal.data.local.DraftManager.getInstance().saveDraft(
+                        vn.edu.mku.portal.data.local.DraftManager.FORM_FORGOT_PASSWORD,
+                        vn.edu.mku.portal.data.local.DraftManager.FIELD_USERNAME,
+                        s != null ? s.toString().trim() : ""
+                );
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                vn.edu.mku.portal.data.local.DraftManager.getInstance().saveDraft(
+                        vn.edu.mku.portal.data.local.DraftManager.FORM_FORGOT_PASSWORD,
+                        vn.edu.mku.portal.data.local.DraftManager.FIELD_EMAIL,
+                        s != null ? s.toString().trim() : ""
+                );
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        // Restore drafts
+        vn.edu.mku.portal.data.local.DraftManager dm = vn.edu.mku.portal.data.local.DraftManager.getInstance();
+        String savedUser = dm.getDraft(vn.edu.mku.portal.data.local.DraftManager.FORM_FORGOT_PASSWORD, vn.edu.mku.portal.data.local.DraftManager.FIELD_USERNAME, "");
+        String savedEmail = dm.getDraft(vn.edu.mku.portal.data.local.DraftManager.FORM_FORGOT_PASSWORD, vn.edu.mku.portal.data.local.DraftManager.FIELD_EMAIL, "");
+        if (!android.text.TextUtils.isEmpty(savedUser) && etUsername != null) {
+            etUsername.setText(savedUser);
+        }
+        if (!android.text.TextUtils.isEmpty(savedEmail) && etEmail != null) {
+            etEmail.setText(savedEmail);
+        }
+
         btnResetPassword.setOnClickListener(v -> performReset());
     }
 
@@ -138,6 +184,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void performReset() {
+        if (!vn.edu.mku.portal.ui.common.NetworkMonitor.getInstance().isOnline()) {
+            Snackbar.make(findViewById(R.id.mainCoordinator), getString(R.string.text_no_network_no_cache), Snackbar.LENGTH_LONG).show();
+            return;
+        }
+
         String username = etUsername.getText() != null ? etUsername.getText().toString().trim() : "";
         String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
 
@@ -167,6 +218,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         if (state.getSuccessMessageEvent() != null) {
             String successMsg = state.getSuccessMessageEvent().getContentIfNotHandled();
             if (successMsg != null) {
+                vn.edu.mku.portal.data.local.DraftManager.getInstance().clearDraft(vn.edu.mku.portal.data.local.DraftManager.FORM_FORGOT_PASSWORD);
                 Toast.makeText(this, successMsg, Toast.LENGTH_LONG).show();
             }
         }
