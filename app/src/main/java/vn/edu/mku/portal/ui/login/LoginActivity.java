@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         initViews();
         initViewModel();
         setupListeners();
+        vn.edu.mku.portal.data.update.AppUpdateManager.checkUpdateAuto(this);
     }
 
     private void initViews() {

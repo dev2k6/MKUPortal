@@ -270,4 +270,23 @@
     <string name="text_online_restored">✓ Internet connection restored</string>
     <string name="text_draft_restored">Restored unfinished draft</string>
     <string name="text_no_network_no_cache">No Internet connection and no cached data available.</string>
+
+    <!-- App Update Strings -->
+    <string name="label_check_update">Check for updates</string>
+    <string name="update_dialog_title">New version available!</string>
+    <string name="update_version_current_prefix">Current: </string>
+    <string name="update_version_new_prefix">Latest: </string>
+    <string name="update_changelog_header">What\'s new:</string>
+    <string name="update_changelog_default">- Periodic performance improvements and bug fixes.</string>
+    <string name="update_meta_published">Released: %s</string>
+    <string name="update_meta_size">Size: %s</string>
+    <string name="update_meta_recent">New release</string>
+    <string name="btn_update_now">Update now</string>
+    <string name="btn_update_later">Later</string>
+    <string name="btn_ignore_version">Skip this version</string>
+    <string name="msg_checking_update">Checking for updates...</string>
+    <string name="msg_app_is_latest">You are using the latest version (%s)</string>
+    <string name="msg_check_update_failed">Could not check for updates. Please try again later.</string>
+    <string name="msg_cannot_open_update_link">Unable to open update link</string>
+    <string name="msg_version_ignored">Skipped update reminder for version %s</string>
 </resources>

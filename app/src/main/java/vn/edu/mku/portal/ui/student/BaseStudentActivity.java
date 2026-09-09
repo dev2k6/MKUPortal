@@ -95,6 +95,7 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
         }
 
         studentRepository = new StudentRepositoryImpl();
+        vn.edu.mku.portal.data.update.AppUpdateManager.checkUpdateAuto(this);
     }
 
     protected void setupCommonUi() {
@@ -546,6 +547,7 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
         TextView tvHeader = popupView.findViewById(R.id.tvAccountStudentHeader);
         LinearLayout btnMyProfile = popupView.findViewById(R.id.btnAccountMyProfile);
         LinearLayout btnChangePassword = popupView.findViewById(R.id.btnAccountChangePassword);
+        LinearLayout btnCheckUpdate = popupView.findViewById(R.id.btnAccountCheckUpdate);
         MaterialButton btnLogout = popupView.findViewById(R.id.btnAccountLogout);
 
         SessionManager session = SessionManager.getInstance();
@@ -585,6 +587,13 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
             popupWindow.dismiss();
             showChangePasswordDialog();
         });
+
+        if (btnCheckUpdate != null) {
+            btnCheckUpdate.setOnClickListener(v -> {
+                popupWindow.dismiss();
+                vn.edu.mku.portal.data.update.AppUpdateManager.checkUpdateManual(this);
+            });
+        }
 
         btnLogout.setOnClickListener(v -> {
             popupWindow.dismiss();

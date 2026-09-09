@@ -270,4 +270,23 @@
     <string name="text_online_restored">✓ Đã kết nối lại Internet</string>
     <string name="text_draft_restored">Đã khôi phục bản nháp chưa gửi</string>
     <string name="text_no_network_no_cache">Không có kết nối Internet và chưa có dữ liệu lưu tạm.</string>
+
+    <!-- App Update Strings -->
+    <string name="label_check_update">Kiểm tra bản cập nhật</string>
+    <string name="update_dialog_title">Có phiên bản mới!</string>
+    <string name="update_version_current_prefix">Hiện tại: </string>
+    <string name="update_version_new_prefix">Mới nhất: </string>
+    <string name="update_changelog_header">Nội dung cập nhật:</string>
+    <string name="update_changelog_default">- Bản cập nhật định kỳ tối ưu hiệu năng và sửa lỗi.</string>
+    <string name="update_meta_published">Phát hành: %s</string>
+    <string name="update_meta_size">Dung lượng: %s</string>
+    <string name="update_meta_recent">Bản phát hành mới</string>
+    <string name="btn_update_now">Cập nhật ngay</string>
+    <string name="btn_update_later">Để sau</string>
+    <string name="btn_ignore_version">Bỏ qua bản này</string>
+    <string name="msg_checking_update">Đang kiểm tra bản cập nhật...</string>
+    <string name="msg_app_is_latest">Bạn đang sử dụng phiên bản mới nhất (%s)</string>
+    <string name="msg_check_update_failed">Không thể kiểm tra cập nhật. Vui lòng thử lại sau.</string>
+    <string name="msg_cannot_open_update_link">Không thể mở liên kết cập nhật</string>
+    <string name="msg_version_ignored">Đã bỏ qua nhắc nhở phiên bản %s</string>
 </resources>
