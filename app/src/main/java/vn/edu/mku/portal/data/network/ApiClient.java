@@ -33,7 +33,11 @@ public class ApiClient {
     public static synchronized ApiService getApiService() {
         if (apiService == null) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            if (vn.edu.mku.portal.BuildConfig.DEBUG) {
+                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            } else {
+                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+            }
 
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(15, TimeUnit.SECONDS)

@@ -25,7 +25,10 @@ import vn.edu.mku.portal.ui.common.SkeletonHelper;
 
 public class NotificationIndexActivity extends BaseStudentActivity {
 
-    private LinearLayout containerNotificationRows;
+    private LinearLayout layoutSkeletonNotifications;
+    private androidx.recyclerview.widget.RecyclerView rvNotifications;
+    private TextView tvEmptyNotifications;
+    private NotificationAdapter notificationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,15 @@ public class NotificationIndexActivity extends BaseStudentActivity {
 
         setupCommonUi();
 
-        containerNotificationRows = findViewById(R.id.containerNotificationRows);
+        layoutSkeletonNotifications = findViewById(R.id.layoutSkeletonNotifications);
+        rvNotifications = findViewById(R.id.rvNotifications);
+        tvEmptyNotifications = findViewById(R.id.tvEmptyNotifications);
+
+        notificationAdapter = new NotificationAdapter(this::showMessageDetailDialog);
+        if (rvNotifications != null) {
+            rvNotifications.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));
+            rvNotifications.setAdapter(notificationAdapter);
+        }
 
         fetchNotificationList();
     }
@@ -44,7 +55,9 @@ public class NotificationIndexActivity extends BaseStudentActivity {
         studentRepository.fetchMessages(new StudentRepository.ApiCallback<>() {
             @Override
             public void onSuccess(List<StudentMessage> result) {
-                SkeletonHelper.stopPulseAnimation(containerNotificationRows);
+                if (layoutSkeletonNotifications != null) {
+                    SkeletonHelper.stopPulseAnimation(layoutSkeletonNotifications);
+                }
                 cachedMessages = result;
                 int unread = 0;
                 if (result != null) {
@@ -66,53 +79,47 @@ public class NotificationIndexActivity extends BaseStudentActivity {
 
             @Override
             public void onError(String errorMessage) {
-                SkeletonHelper.stopPulseAnimation(containerNotificationRows);
+                if (layoutSkeletonNotifications != null) {
+                    SkeletonHelper.stopPulseAnimation(layoutSkeletonNotifications);
+                    layoutSkeletonNotifications.setVisibility(View.GONE);
+                }
                 Snackbar.make(findViewById(R.id.mainCoordinator), errorMessage, Snackbar.LENGTH_LONG).show();
             }
         });
     }
 
     private void showSkeletonRows() {
-        if (containerNotificationRows == null) return;
-        containerNotificationRows.removeAllViews();
+        if (layoutSkeletonNotifications == null) return;
+        layoutSkeletonNotifications.removeAllViews();
         for (int i = 0; i < 5; i++) {
-            View skeletonRow = LayoutInflater.from(this).inflate(R.layout.item_notification_skeleton_row, containerNotificationRows, false);
-            containerNotificationRows.addView(skeletonRow);
+            View skeletonRow = LayoutInflater.from(this).inflate(R.layout.item_notification_skeleton_row, layoutSkeletonNotifications, false);
+            layoutSkeletonNotifications.addView(skeletonRow);
         }
-        SkeletonHelper.startPulseAnimation(containerNotificationRows);
+        layoutSkeletonNotifications.setVisibility(View.VISIBLE);
+        if (rvNotifications != null) rvNotifications.setVisibility(View.GONE);
+        if (tvEmptyNotifications != null) tvEmptyNotifications.setVisibility(View.GONE);
+        SkeletonHelper.startPulseAnimation(layoutSkeletonNotifications);
     }
 
     private void populateNotificationRows(List<StudentMessage> list) {
-        if (containerNotificationRows == null) return;
-        containerNotificationRows.removeAllViews();
+        if (layoutSkeletonNotifications != null) {
+            SkeletonHelper.stopPulseAnimation(layoutSkeletonNotifications);
+            layoutSkeletonNotifications.setVisibility(View.GONE);
+        }
 
         if (list == null || list.isEmpty()) {
-            TextView tvEmpty = new TextView(this);
-            tvEmpty.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
-            tvEmpty.setText(getString(R.string.text_no_new_notifications));
-            tvEmpty.setTextColor(getColor(R.color.mku_text_sub));
-            containerNotificationRows.addView(tvEmpty);
+            if (rvNotifications != null) rvNotifications.setVisibility(View.GONE);
+            if (tvEmptyNotifications != null) tvEmptyNotifications.setVisibility(View.VISIBLE);
+            if (notificationAdapter != null) notificationAdapter.submitList(null);
             return;
         }
 
-        for (StudentMessage msg : list) {
-            View rowView = LayoutInflater.from(this).inflate(R.layout.item_notification_row, containerNotificationRows, false);
-            TextView tvSubject = rowView.findViewById(R.id.tvMessageSubject);
-            TextView tvSender = rowView.findViewById(R.id.tvSenderName);
-            TextView tvDate = rowView.findViewById(R.id.tvCreationDate);
-
-            if (tvSubject != null) {
-                tvSubject.setText(formatValue(msg.getMessageSubject()));
-                tvSubject.setOnClickListener(v -> showMessageDetailDialog(msg));
-            }
-            if (tvSender != null) {
-                tvSender.setText(formatValue(msg.getSenderName()));
-            }
-            if (tvDate != null) {
-                tvDate.setText(formatValue(msg.getCreationDate()));
-            }
-
-            containerNotificationRows.addView(rowView);
+        if (tvEmptyNotifications != null) tvEmptyNotifications.setVisibility(View.GONE);
+        if (rvNotifications != null) {
+            rvNotifications.setVisibility(View.VISIBLE);
+        }
+        if (notificationAdapter != null) {
+            notificationAdapter.submitList(list);
         }
     }
 

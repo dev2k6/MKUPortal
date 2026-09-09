@@ -139,12 +139,31 @@
                                 android:layout_height="1dp"
                                 android:background="@color/mku_divider" />
 
-                            <!-- Notification Rows Container -->
+                            <!-- Skeleton Rows Container -->
                             <LinearLayout
-                                android:id="@+id/containerNotificationRows"
+                                android:id="@+id/layoutSkeletonNotifications"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical" />
+                                android:orientation="vertical"
+                                android:visibility="gone" />
+
+                            <!-- Notification RecyclerView -->
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvNotifications"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                android:overScrollMode="never" />
+
+                            <!-- Empty View -->
+                            <TextView
+                                android:id="@+id/tvEmptyNotifications"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="16dp"
+                                android:text="@string/text_no_new_notifications"
+                                android:textColor="@color/mku_text_sub"
+                                android:visibility="gone" />
 
                         </LinearLayout>
 

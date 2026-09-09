@@ -28,11 +28,13 @@ public class AppCacheManager {
     private final ExecutorService diskExecutor;
 
     private static class CacheEntry {
-        String json;
+        Object data; // In-memory Object for 0ms zero-copy access
+        String json; // Serialized JSON string for disk persistence
         long timestamp;
         long ttlMillis;
 
-        CacheEntry(String json, long timestamp, long ttlMillis) {
+        CacheEntry(Object data, String json, long timestamp, long ttlMillis) {
+            this.data = data;
             this.json = json;
             this.timestamp = timestamp;
             this.ttlMillis = ttlMillis;
@@ -66,20 +68,20 @@ public class AppCacheManager {
 
     public synchronized <T> void put(String key, T data, long ttlMillis) {
         if (key == null || data == null) return;
-        try {
-            String json = gson.toJson(data);
-            long timestamp = System.currentTimeMillis();
-            CacheEntry entry = new CacheEntry(json, timestamp, ttlMillis);
+        long timestamp = System.currentTimeMillis();
+        // 1. Immediately store data in RAM without waiting for serialization
+        CacheEntry entry = new CacheEntry(data, null, timestamp, ttlMillis);
+        memoryCache.put(key, entry);
 
-            // Put in memory
-            memoryCache.put(key, entry);
-
-            // Save to disk asynchronously
-            diskExecutor.execute(() -> {
+        // 2. Offload JSON serialization and disk storage to background executor
+        diskExecutor.execute(() -> {
+            try {
+                String json = gson.toJson(data);
+                entry.json = json;
                 String meta = timestamp + "|" + ttlMillis + "|" + json;
                 prefs.edit().putString(key, meta).apply();
-            });
-        } catch (Exception ignored) {}
+            } catch (Exception ignored) {}
+        });
     }
 
     public synchronized boolean hasValidCache(String key) {
@@ -91,24 +93,46 @@ public class AppCacheManager {
         return getEntry(key) != null;
     }
 
+    @SuppressWarnings("unchecked")
     public synchronized <T> T get(String key, Type typeOfT) {
         CacheEntry entry = getEntry(key);
         if (entry == null || entry.isExpired()) return null;
-        try {
-            return gson.fromJson(entry.json, typeOfT);
-        } catch (Exception e) {
-            return null;
+        if (entry.data != null) {
+            try {
+                return (T) entry.data;
+            } catch (ClassCastException ignored) {}
         }
+        if (entry.json != null) {
+            try {
+                T parsed = gson.fromJson(entry.json, typeOfT);
+                entry.data = parsed;
+                return parsed;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
+    @SuppressWarnings("unchecked")
     public synchronized <T> T getOrStale(String key, Type typeOfT) {
         CacheEntry entry = getEntry(key);
         if (entry == null) return null;
-        try {
-            return gson.fromJson(entry.json, typeOfT);
-        } catch (Exception e) {
-            return null;
+        if (entry.data != null) {
+            try {
+                return (T) entry.data;
+            } catch (ClassCastException ignored) {}
         }
+        if (entry.json != null) {
+            try {
+                T parsed = gson.fromJson(entry.json, typeOfT);
+                entry.data = parsed;
+                return parsed;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     private synchronized CacheEntry getEntry(String key) {
@@ -130,7 +154,7 @@ public class AppCacheManager {
                     long timestamp = Long.parseLong(raw.substring(0, firstPipe));
                     long ttl = Long.parseLong(raw.substring(firstPipe + 1, secondPipe));
                     String json = raw.substring(secondPipe + 1);
-                    CacheEntry diskEntry = new CacheEntry(json, timestamp, ttl);
+                    CacheEntry diskEntry = new CacheEntry(null, json, timestamp, ttl);
                     memoryCache.put(key, diskEntry);
                     return diskEntry;
                 } catch (Exception ignored) {}
