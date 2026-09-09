@@ -1,6 +1,7 @@
 name = "mku-crash-reporter"
 main = "worker.js"
 compatibility_date = "2024-09-01"
+account_id = "b77b3270d29b616c9640e9b374bb8202"
 
 # Environment variables that can be committed (non-sensitive)
 [vars]

@@ -24,7 +24,14 @@ export default {
     }
 
     // 3. Crash report intake route
-    if (request.method === "POST" && (url.pathname === "/api/crash-report" || url.pathname === "/crash-report" || url.pathname === "/")) {
+    if (
+      request.method === "POST" &&
+      (url.pathname === "/api/crash" ||
+        url.pathname === "/api/crash-report" ||
+        url.pathname === "/crash" ||
+        url.pathname === "/crash-report" ||
+        url.pathname === "/")
+    ) {
       return handleCrashReport(request, env);
     }
 
@@ -53,9 +60,36 @@ async function handleCrashReport(request, env) {
       return jsonResponse({ error: "Invalid JSON payload" }, 400);
     }
 
+    // Support both snake_case and camelCase formats
+    const excClass = payload.exception_class || payload.exceptionClass;
+    const stackTrace = payload.stack_trace || payload.stackTrace;
+    const excMessage = payload.exception_message || payload.exceptionMessage;
+
     // Validate required fields
-    if (!payload.exception_class && !payload.stack_trace && !payload.exception_message) {
+    if (!excClass && !stackTrace && !excMessage) {
       return jsonResponse({ error: "Missing required crash information" }, 400);
+    }
+
+    // Normalize payload to snake_case for formatter
+    payload.app_name = payload.app_name || payload.appName;
+    payload.version_name = payload.version_name || payload.versionName;
+    payload.version_code = payload.version_code || payload.versionCode;
+    payload.build_type = payload.build_type || payload.buildType;
+    payload.student_id = payload.student_id || payload.studentId;
+    payload.device_manufacturer = payload.device_manufacturer || payload.deviceManufacturer;
+    payload.device_model = payload.device_model || payload.deviceModel;
+    payload.android_version = payload.android_version || payload.androidVersion;
+    payload.sdk_int = payload.sdk_int || payload.sdkInt;
+    payload.active_screen = payload.active_screen || payload.activeScreen;
+    payload.thread_name = payload.thread_name || payload.threadName;
+    payload.exception_class = excClass;
+    payload.exception_message = excMessage;
+    payload.stack_trace = stackTrace;
+    payload.available_ram_mb = payload.available_ram_mb || payload.availableRamMb;
+    payload.total_ram_mb = payload.total_ram_mb || payload.totalRamMb;
+    payload.network_type = payload.network_type || payload.networkType;
+    if (payload.is_fatal === undefined && payload.isFatal !== undefined) {
+      payload.is_fatal = payload.isFatal;
     }
 
     // Format HTML alert message for Telegram

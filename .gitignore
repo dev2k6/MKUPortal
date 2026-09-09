@@ -77,4 +77,6 @@ desktop.ini
 *.swp
 *.swo
 *.bak
-
+# Node & Wrangler
+node_modules/
+.wrangler/
