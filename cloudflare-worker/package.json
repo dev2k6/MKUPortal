@@ -1,0 +1,22 @@
+{
+  "name": "mku-crash-reporter-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker Gateway forwarding Android app crash reports to Telegram Bot",
+  "main": "worker.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [
+    "cloudflare",
+    "worker",
+    "telegram",
+    "crash-reporter",
+    "android"
+  ],
+  "author": "MKU Portal Team",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.78.0"
+  }
+}

@@ -1,0 +1,211 @@
+/**
+ * MKUPortal - Cloudflare Worker Crash Reporter Gateway
+ * 
+ * Automatically receives crash reports from the MKUPortal Android App
+ * and forwards formatted alert messages to an Admin Telegram Bot/Group.
+ */
+
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    // 1. Handle CORS Preflight
+    if (request.method === "OPTIONS") {
+      return handleCors();
+    }
+
+    // 2. Health check route
+    if (request.method === "GET" && (url.pathname === "/" || url.pathname === "/health")) {
+      return jsonResponse({
+        service: "MKUPortal Crash Reporter Gateway",
+        status: "healthy",
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // 3. Crash report intake route
+    if (request.method === "POST" && (url.pathname === "/api/crash-report" || url.pathname === "/crash-report" || url.pathname === "/")) {
+      return handleCrashReport(request, env);
+    }
+
+    return jsonResponse({ error: "Endpoint not found" }, 404);
+  }
+};
+
+/**
+ * Handles incoming crash report and sends to Telegram
+ */
+async function handleCrashReport(request, env) {
+  try {
+    // Optional Bearer token validation if configured
+    if (env.API_SECRET_KEY) {
+      const authHeader = request.headers.get("Authorization") || "";
+      const expected = `Bearer ${env.API_SECRET_KEY}`;
+      if (authHeader !== expected) {
+        return jsonResponse({ error: "Unauthorized: Invalid API secret key" }, 401);
+      }
+    }
+
+    let payload;
+    try {
+      payload = await request.json();
+    } catch (e) {
+      return jsonResponse({ error: "Invalid JSON payload" }, 400);
+    }
+
+    // Validate required fields
+    if (!payload.exception_class && !payload.stack_trace && !payload.exception_message) {
+      return jsonResponse({ error: "Missing required crash information" }, 400);
+    }
+
+    // Format HTML alert message for Telegram
+    const message = formatTelegramMessage(payload);
+
+    // Send to Telegram
+    const telegramResult = await sendToTelegram(message, env);
+
+    if (telegramResult.ok) {
+      return jsonResponse({
+        status: "success",
+        message: "Crash report sent to Telegram successfully"
+      });
+    } else {
+      return jsonResponse({
+        status: "partial_error",
+        message: "Failed to forward to Telegram",
+        details: telegramResult.description
+      }, 502);
+    }
+  } catch (error) {
+    return jsonResponse({
+      error: "Internal Worker Error",
+      details: error.message
+    }, 500);
+  }
+}
+
+/**
+ * Format crash details into clean HTML for Telegram Bot API
+ */
+function formatTelegramMessage(p) {
+  const isFatal = p.is_fatal !== false;
+  const alertIcon = isFatal ? "🚨" : "⚠️";
+  const severity = isFatal ? "🔴 <b>CRITICAL (FATAL CRASH)</b>" : "🟡 <b>WARNING (NON-FATAL)</b>";
+
+  const appName = escapeHtml(p.app_name || "MKUPortal");
+  const versionName = escapeHtml(p.version_name || "1.0");
+  const versionCode = p.version_code || 1;
+  const buildType = escapeHtml(p.build_type || "release");
+
+  const studentId = escapeHtml(p.student_id || "Khách / Chưa đăng nhập");
+  const screen = escapeHtml(p.active_screen || "Không xác định");
+
+  const device = escapeHtml(`${p.device_manufacturer || ""} ${p.device_model || "Thiết bị không rõ"}`.trim());
+  const osInfo = escapeHtml(`Android ${p.android_version || "?"} (API ${p.sdk_int || "?"})`);
+
+  const network = escapeHtml(p.network_type || "Không xác định");
+  const ramInfo = (p.available_ram_mb && p.total_ram_mb)
+    ? `${p.available_ram_mb} MB / ${p.total_ram_mb} MB`
+    : "Không rõ";
+
+  const timeStr = p.timestamp
+    ? new Date(p.timestamp).toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" })
+    : new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+
+  const excClass = escapeHtml(p.exception_class || "Ngoại lệ không rõ");
+  const excMessage = escapeHtml(p.exception_message || "Không có thông điệp");
+
+  // Truncate stacktrace to keep under Telegram 4096 character limit
+  const cleanStack = truncateStackTrace(p.stack_trace || "Không có stacktrace", 2500);
+
+  return `
+${alertIcon} <b>[${appName}] BÁO CÁO SỰ CỐ ỨNG DỤNG</b> ${alertIcon}
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚙️ <b>Mức độ</b>: ${severity}
+👤 <b>Sinh viên</b>: <code>${studentId}</code>
+📍 <b>Màn hình</b>: <code>${screen}</code>
+📱 <b>Thiết bị</b>: <b>${device}</b> (${osInfo})
+📶 <b>Mạng</b>: <code>${network}</code> | 🧠 <b>RAM trống</b>: <code>${ramInfo}</code>
+🏷️ <b>Phiên bản</b>: <code>v${versionName} (Build ${versionCode}) - ${buildType}</code>
+⏰ <b>Thời gian</b>: <code>${timeStr}</code>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ <b>Loại lỗi</b>: <code>${excClass}</code>
+💬 <b>Thông báo</b>: <i>${excMessage}</i>
+
+📜 <b>Stack Trace</b>:
+<pre><code class="language-java">${cleanStack}</code></pre>
+  `.trim();
+}
+
+/**
+ * Truncate long stacktraces preserving head and relevant tail frames
+ */
+function truncateStackTrace(stack, maxLen) {
+  if (stack.length <= maxLen) {
+    return escapeHtml(stack);
+  }
+  const headLen = Math.floor(maxLen * 0.7);
+  const tailLen = Math.floor(maxLen * 0.25);
+  const head = stack.substring(0, headLen);
+  const tail = stack.substring(stack.length - tailLen);
+  return escapeHtml(`${head}\n\n... [Đã rút gọn ${stack.length - maxLen} ký tự stacktrace] ...\n\n${tail}`);
+}
+
+/**
+ * Dispatch message to Telegram Bot API
+ */
+async function sendToTelegram(text, env) {
+  const token = env.TELEGRAM_BOT_TOKEN;
+  const chatId = env.TELEGRAM_CHAT_ID;
+
+  if (!token || !chatId) {
+    return {
+      ok: false,
+      description: "Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID in Worker environment secrets"
+    };
+  }
+
+  const tgUrl = `https://api.telegram.org/bot${token}/sendMessage`;
+  const response = await fetch(tgUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: text,
+      parse_mode: "HTML",
+      disable_web_page_preview: true
+    })
+  });
+
+  return await response.json();
+}
+
+function escapeHtml(text) {
+  if (!text) return "";
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function handleCors() {
+  return new Response(null, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
+  });
+}
+
+function jsonResponse(body, status = 200) {
+  return new Response(JSON.stringify(body, null, 2), {
+    status: status,
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      "Access-Control-Allow-Origin": "*"
+    }
+  });
+}

@@ -29,3 +29,4 @@
 # Application Activities, Services, Application class
 -keep class vn.edu.mku.portal.MKUApplication { *; }
 -keep class vn.edu.mku.portal.service.** { *; }
+-keep class vn.edu.mku.portal.data.crash.** { *; }

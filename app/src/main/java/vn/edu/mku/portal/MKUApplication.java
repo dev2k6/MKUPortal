@@ -16,6 +16,7 @@ public class MKUApplication extends Application {
         super.onCreate();
         appContext = getApplicationContext();
 
+        vn.edu.mku.portal.data.crash.CrashReporter.init(this);
         LanguageManager.init(this);
         SessionManager.init(this);
         SettingsManager.init(this);
