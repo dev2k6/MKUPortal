@@ -1,6 +1,9 @@
 /**
  * MKUPortal - Cloudflare Worker Crash Reporter Gateway
  * 
+ * Thái Nguyên (dev2k6)
+ * 03333 499 48 - 07777 63 858
+ * 
  * Automatically receives crash reports from the MKUPortal Android App
  * and forwards formatted alert messages to an Admin Telegram Bot/Group.
  */

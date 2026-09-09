@@ -1,3 +1,7 @@
+/**
+ * Thái Nguyên (dev2k6)
+ * 03333 499 48 - 07777 63 858
+ */
 package vn.edu.mku.portal.ui.login;
 
 import vn.edu.mku.portal.domain.model.ValidationResult;
