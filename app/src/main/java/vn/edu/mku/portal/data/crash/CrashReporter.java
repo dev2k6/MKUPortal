@@ -264,7 +264,7 @@ public class CrashReporter implements Thread.UncaughtExceptionHandler {
         String json = prefs.getString(CrashConstants.KEY_PENDING_QUEUE, null);
         if (!TextUtils.isEmpty(json)) {
             try {
-                Type type = new TypeToken<List<CrashReportPayload>>() {}.getType();
+                Type type = TypeToken.getParameterized(List.class, CrashReportPayload.class).getType();
                 List<CrashReportPayload> list = gson.fromJson(json, type);
                 if (list != null) return new ArrayList<>(list);
             } catch (Exception ignored) {}

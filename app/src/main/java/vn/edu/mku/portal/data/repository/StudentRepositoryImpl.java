@@ -155,7 +155,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("messages");
         executeCached(
                 key,
-                new TypeToken<List<StudentMessage>>() {}.getType(),
+                TypeToken.getParameterized(List.class, StudentMessage.class).getType(),
                 AppCacheManager.TTL_MINUTES_15,
                 ApiClient.getApiService().getMessages(),
                 callback,
@@ -169,7 +169,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("menu_" + langCode);
         executeCached(
                 key,
-                new TypeToken<List<MenuItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, MenuItem.class).getType(),
                 AppCacheManager.TTL_DAY,
                 ApiClient.getApiService().getMenu(langCode),
                 callback,
@@ -183,7 +183,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("study_programs");
         executeCached(
                 key,
-                new TypeToken<List<StudyProgramHeader>>() {}.getType(),
+                TypeToken.getParameterized(List.class, StudyProgramHeader.class).getType(),
                 AppCacheManager.TTL_DAY,
                 ApiClient.getApiService().getStudyProgramHeaders(),
                 callback,
@@ -225,7 +225,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("week_schedule_" + year + "_" + term);
         executeCached(
                 key,
-                new TypeToken<List<WeekItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, WeekItem.class).getType(),
                 AppCacheManager.TTL_HOURS_2,
                 ApiClient.getApiService().getWeekSchedule(year, term),
                 callback,
@@ -267,7 +267,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("exams_" + year + "_" + term);
         executeCached(
                 key,
-                new TypeToken<List<ExamItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, ExamItem.class).getType(),
                 AppCacheManager.TTL_HOURS_2,
                 ApiClient.getApiService().getExams(year, term),
                 callback,
@@ -281,7 +281,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("decisions");
         executeCached(
                 key,
-                new TypeToken<List<DecisionItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, DecisionItem.class).getType(),
                 AppCacheManager.TTL_HOURS_2,
                 ApiClient.getApiService().getDecisions(),
                 callback,
@@ -295,7 +295,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("behavior_scores");
         executeCached(
                 key,
-                new TypeToken<List<BehaviorScoreItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, BehaviorScoreItem.class).getType(),
                 AppCacheManager.TTL_HOURS_2,
                 ApiClient.getApiService().getBehaviorScores(),
                 callback,
@@ -309,7 +309,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("marks_" + programId + "_" + type);
         executeCached(
                 key,
-                new TypeToken<List<MarkYearGroup>>() {}.getType(),
+                TypeToken.getParameterized(List.class, MarkYearGroup.class).getType(),
                 AppCacheManager.TTL_HOURS_2,
                 ApiClient.getApiService().getMarks(programId, type),
                 callback,
@@ -323,7 +323,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("mark_detail_" + scheduleStudyUnitId);
         executeCached(
                 key,
-                new TypeToken<List<MarkDetailItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, MarkDetailItem.class).getType(),
                 AppCacheManager.TTL_HOURS_2,
                 ApiClient.getApiService().getMarkDetail(scheduleStudyUnitId),
                 callback,
@@ -337,7 +337,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = "footer_info";
         executeCached(
                 key,
-                new TypeToken<List<FooterInfoItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, FooterInfoItem.class).getType(),
                 AppCacheManager.TTL_DAY,
                 ApiClient.getApiService().getFooterInfo(),
                 callback,
@@ -351,7 +351,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("account_fees");
         executeCached(
                 key,
-                new TypeToken<List<AccountFeeItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, AccountFeeItem.class).getType(),
                 AppCacheManager.TTL_MINUTES_30,
                 ApiClient.getApiService().getAccountFees(),
                 callback,
@@ -365,7 +365,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("order_details");
         executeCached(
                 key,
-                new TypeToken<List<OrderDetailItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, OrderDetailItem.class).getType(),
                 AppCacheManager.TTL_MINUTES_30,
                 ApiClient.getApiService().getOrderDetails(),
                 callback,
@@ -468,7 +468,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = studentKey("comments_" + year + "_" + term);
         executeCached(
                 key,
-                new TypeToken<List<CommentItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, CommentItem.class).getType(),
                 AppCacheManager.TTL_MINUTES_15,
                 ApiClient.getApiService().getComments(year, term),
                 callback,
@@ -482,7 +482,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         String key = "departments";
         executeCached(
                 key,
-                new TypeToken<List<DepartmentItem>>() {}.getType(),
+                TypeToken.getParameterized(List.class, DepartmentItem.class).getType(),
                 AppCacheManager.TTL_DAY,
                 ApiClient.getApiService().getDepartments(),
                 callback,

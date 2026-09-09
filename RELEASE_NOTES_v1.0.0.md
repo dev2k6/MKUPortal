@@ -35,7 +35,7 @@ We are thrilled to announce the initial official release of **MKUPortal (v1.0.0)
 Verify APK integrity after downloading:
 
 - **File**: `MKUPortal-v1.0.0.apk`
-- **SHA-256**: `2431315b49a6b313569c59ab5618f22ec941289ed4b8448463acae8cd655466c`
+- **SHA-256**: `280051d1573586e03c00fa9c6a529466f439efede4194a705ec447e57e541762`
 
 ```bash
 # macOS / Linux

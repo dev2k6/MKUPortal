@@ -63,7 +63,7 @@ public class GradeNotificationManager {
         createNotificationChannel(context);
 
         String cacheKey = SNAPSHOT_KEY_PREFIX + studentId;
-        Type snapshotType = new TypeToken<HashMap<String, String>>() {}.getType();
+        Type snapshotType = TypeToken.getParameterized(HashMap.class, String.class, String.class).getType();
         Map<String, String> oldSnapshot = AppCacheManager.getInstance().getOrStale(cacheKey, snapshotType);
 
         Map<String, String> currentSnapshot = new HashMap<>();

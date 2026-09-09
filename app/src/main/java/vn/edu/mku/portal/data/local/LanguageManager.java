@@ -169,7 +169,7 @@ public class LanguageManager {
         String json = prefs.getString(KEY_CACHE_PREFIX + langCode, null);
         if (!TextUtils.isEmpty(json)) {
             try {
-                Type type = new TypeToken<List<ResourceLanguageItem>>() {}.getType();
+                Type type = TypeToken.getParameterized(List.class, ResourceLanguageItem.class).getType();
                 List<ResourceLanguageItem> list = gson.fromJson(json, type);
                 if (list != null) {
                     populateCache(list);
