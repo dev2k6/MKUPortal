@@ -162,6 +162,11 @@ public class MarksActivity extends BaseStudentActivity {
             public void onSuccess(List<MarkYearGroup> result) {
                 SkeletonHelper.stopPulseAnimation(containerMarksTable);
                 allYearMarks = result;
+                vn.edu.mku.portal.ui.common.GradeNotificationManager.processAndNotify(
+                        MarksActivity.this,
+                        vn.edu.mku.portal.data.local.SessionManager.getInstance().getStudentId(),
+                        result
+                );
                 applyFilterAndPopulate();
             }
 
